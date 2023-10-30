@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>TouchType</title>
+    <meta name="description" content="TouchType is a website for all your keyboard needs!">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* -webkit-appearance: none;
+            margin: 0; */
+            display: none;
+        }
+        #user-text::-webkit-scrollbar,
+        #target-text::-webkit-scrollbar {
+            /* -webkit-appearance: none; */
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html"><img id="logo" src="/images/TouchType.png" alt="TouchType logo"></a>
+        <br>
+        <ul>
+            <li><a href="index.html">Typing Test</a></li>
+            <li><a href="">Keyboard Tester</a></li>
+            <!-- <li><a href="">Rhythm Game</a></li> -->
+        </ul>
+
+    </nav>
+
+    <main>
+        <div class="container">
+            <div id="target-text"></div>
+            <!-- <textarea name="target-text" id="target-text" placeholder="" spellcheck="false" data-gramm="false"
+                data-gramm_editor="false" data-enable-grammarly="false"></textarea> -->
+            <br>
+            <label for="timer">Time:</label>
+            <input type="number" name="timer" id="timer" onfocus="this.value=''" value="60">
+            <label for="wpm">WPM:</label>
+            <input type="number" name="wpm" id="wpm" disabled>
+            <br>
+            <textarea name="user-text" id="user-text" placeholder="Type here to begin" onkeydown="startTest()"
+                spellcheck="false" data-gramm="false" data-gramm_editor="false"
+                data-enable-grammarly="false"></textarea>
+            <p><kbd>Esc</kbd> : Restart</p>
+        </div>
+    </main>
+
+    <footer>
+        <span class="about">
+            <a href="https://github.com/alan-w-u "><img src="/images/github.png" alt="GitHub"></a>
+            <a href="https://www.linkedin.com/in/alan-w-u"><img src="/images/linkedin.png" alt="LinkedIn"></a>
+        </span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

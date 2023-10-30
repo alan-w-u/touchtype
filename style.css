@@ -1,0 +1,199 @@
+/* Custom Colours */
+:root {
+    --main-grey: rgb(50, 50, 50); /* #323232 */
+    --side-grey: rgb(100, 100, 100); /* #646464 */
+    --off-grey: rgb(150, 150, 150); /* #969696 */
+    --main-brown: rgb(234, 215, 187); /* #ead7bb / rgb(234, 215, 187) */
+    --side-brown: rgb(182, 158, 123); /* #b69e7b / rgb(182, 158, 123) */
+}
+
+/* Style for the entire file */
+* {
+    margin: 0;
+    background-color: var(--main-brown);
+    font-family: Verdana, Arial, sans-serif;
+    color: var(--main-grey);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Syle for semantic elements (sections) */
+nav {
+    margin: 0.25rem 0rem 1rem 0rem;
+}
+
+main {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+footer {
+    margin-top: 1rem;
+}
+
+/* Style for general HTML objects */
+a {
+    color: var(--side-grey);
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+label {
+    font-weight: bold;
+}
+
+kbd {
+    background-color: var(--main-brown); 
+    border-radius: 3px;
+    border: 1px solid var(--side-brown);
+    box-sizing: border-box;
+    box-shadow:
+      0 1px 1px rgba(0, 0, 0, 0.2),
+      0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    white-space: nowrap;
+  }
+
+/* Style for classes */
+.container {
+    position: absolute;
+    transform: translate(-50%);
+    left: 50%;
+    right: auto;
+}
+
+.container, p {
+    position: absolute;
+    transform: translate(-50%);
+    left: 50%;
+    right: auto;
+}
+
+.about {
+    position: fixed;
+    bottom: 0.5rem;
+    transform: translate(-50%);
+    left: 50%;
+    right: auto;
+}
+
+.target-chars {
+    color: var(--side-grey);
+    margin: 1rem 0rem;
+}
+
+.correct {
+    color: rgb(50, 150, 50);
+}
+
+.incorrect {
+    color: rgb(255, 0, 0);
+}
+
+/* Style for id */
+#logo {
+    width: 15rem;
+    height: auto;
+    float: left;
+    margin: 0.5rem 1rem;
+}
+
+#user-text {
+    width: 50rem;
+    height: 15rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.025);
+    font-weight: bold;
+    resize: none;
+    border: 0.1rem solid var(--side-grey);
+    border-radius: 1rem;
+    box-sizing: border-box;
+    /* border: 0; */
+    outline-style: none;
+    overflow: scroll;
+    margin: 1rem 0rem 2rem 0rem;
+}
+
+#target-text {
+    width: 50rem;
+    height: 12rem;
+    padding: 1rem;
+    font-weight: bold;
+    resize: none;
+    border: 0.1rem solid var(--side-grey);
+    border-radius: 1rem;
+    box-sizing: border-box;
+    outline-style: none;
+    overflow: scroll;
+    margin: 0rem 0rem 0.5rem 0rem;
+}
+
+#timer {
+    width: 5rem;
+    height: auto;
+    color: var(--off-grey);
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.025);
+    border: 0.1rem solid var(--side-grey);
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    outline-style: none;
+    margin: 0.25rem 3rem 0rem 0rem;
+}
+
+#wpm {
+    width: 5rem;
+    height: auto;
+    color: var(--main-grey);
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.025);
+    border: 0.1rem solid transparent;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    outline-style: none;
+    margin: 0.25rem 0rem 0rem 0rem;
+}
+
+/* Style for selectors */
+nav ul {
+    display: inline;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-sizing: border-box;
+}
+
+nav ul li a:hover {
+    background-color: var(--side-brown); 
+    color: white;
+}
+
+footer img {
+    width: 2rem;
+    height: auto;
+    padding: 0.25em;
+    margin: 0.1rem;
+}
+
+footer span a img:hover {
+    background-color: var(--side-brown);
+    border-radius: 0.5rem;
+}
+
