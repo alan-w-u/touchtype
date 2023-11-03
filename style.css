@@ -1,34 +1,45 @@
 /* Custom Colours */
 :root {
-    --main-grey: rgb(50, 50, 50); /* #323232 */
-    --side-grey: rgb(100, 100, 100); /* #646464 */
-    --off-grey: rgb(150, 150, 150); /* #969696 */
-    --main-brown: rgb(234, 215, 187); /* #ead7bb / rgb(234, 215, 187) */
-    --side-brown: rgb(182, 158, 123); /* #b69e7b / rgb(182, 158, 123) */
+    --main-grey: rgb(50, 50, 50); /* #323232 | rgb(50, 50, 50) */
+    --side-grey: rgb(100, 100, 100); /* #646464 | rgb(100, 100, 100) */
+    --off-grey: rgb(150, 150, 150); /* #969696 | rgb(150, 150, 150) */
+    --main-brown: rgb(234, 215, 187); /* #ead7bb | rgb(234, 215, 187) */
+    --side-brown: rgb(182, 158, 123); /* #b69e7b | rgb(182, 158, 123) */
 }
 
-/* Style for the entire file */
+/* Style for main HTML/semantic (section) elements */
 * {
     margin: 0;
-    background-color: var(--main-brown);
     font-family: Verdana, Arial, sans-serif;
     color: var(--main-grey);
     font-size: 1.1rem;
     font-weight: bold;
+    box-sizing: border-box;
 }
 
-/* Syle for semantic elements (sections) */
+body {
+    background-color: var(--main-brown);
+}
+
 nav {
     margin: 0.25rem 0rem 1rem 0rem;
 }
 
 main {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin: 3rem 0rem
+}
+
+main, p {
+    display: inline;
+    position: fixed;
+    transform: translateX(-50%);
+    left: 50%;
+    right: auto;
 }
 
 footer {
-    margin-top: 1rem;
+    position: absolute;
+    margin-top: auto;
 }
 
 /* Style for general HTML objects */
@@ -44,7 +55,7 @@ label {
 }
 
 kbd {
-    background-color: var(--main-brown); 
+    background-color: var(--main-brown);
     border-radius: 3px;
     border: 1px solid var(--side-brown);
     box-sizing: border-box;
@@ -59,21 +70,8 @@ kbd {
   }
 
 /* Style for classes */
-.container {
-    position: absolute;
-    transform: translate(-50%);
-    left: 50%;
-    right: auto;
-}
-
-.container, p {
-    position: absolute;
-    transform: translate(-50%);
-    left: 50%;
-    right: auto;
-}
-
 .about {
+    display: inline;
     position: fixed;
     bottom: 0.5rem;
     transform: translate(-50%);
@@ -112,10 +110,9 @@ kbd {
     border: 0.1rem solid var(--side-grey);
     border-radius: 1rem;
     box-sizing: border-box;
-    /* border: 0; */
     outline-style: none;
     overflow: scroll;
-    margin: 1rem 0rem 2rem 0rem;
+    margin: 1rem 0rem;
 }
 
 #target-text {
@@ -141,7 +138,6 @@ kbd {
     background: rgba(0, 0, 0, 0.025);
     border: 0.1rem solid var(--side-grey);
     border-radius: 0.5rem;
-    box-sizing: border-box;
     outline-style: none;
     margin: 0.25rem 3rem 0rem 0rem;
 }
@@ -155,9 +151,21 @@ kbd {
     background: rgba(0, 0, 0, 0.025);
     border: 0.1rem solid transparent;
     border-radius: 0.5rem;
-    box-sizing: border-box;
     outline-style: none;
     margin: 0.25rem 0rem 0rem 0rem;
+}
+
+#restart {
+    padding: 0.5rem;
+}
+
+#restart:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--side-brown);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    outline-style: none;
 }
 
 /* Style for selectors */
@@ -181,15 +189,15 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: var(--side-brown); 
     color: white;
+    background-color: var(--side-brown); 
 }
 
 footer img {
-    width: 2rem;
+    width: 2.5rem;
     height: auto;
     padding: 0.25em;
-    margin: 0.1rem;
+    margin: 0.05rem;
 }
 
 footer span a img:hover {

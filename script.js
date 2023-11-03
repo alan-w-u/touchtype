@@ -4,6 +4,7 @@ const userText = document.getElementById("user-text");
 const targetText = document.getElementById("target-text");
 const timer = document.getElementById("timer");
 const wpm = document.getElementById("wpm");
+const restart = document.getElementById("restart");
 
 // Variables
 let startedTest = false;
@@ -11,7 +12,6 @@ let initialTime = timer.value;
 let time = 0;
 let dataMain; // The random word data being displayed
 let dataSide; // A queued set of random words (for reset performance)
-// let cursorIndex = 0; // The cursor to match the user text and target text
 
 // Actions when loading the webpage
 window.onload = () => {
@@ -24,20 +24,10 @@ document.addEventListener("keydown", function (e) {
     keyReset(e);
 }, false);
 
-// Fetch random words from the API
-// const getRandomWords = async () => {
-//     const response = await fetch(randomWordsAPI);
-//     let data = await response.json();
-//     let randomWordsArray = data; // Array of random words fetched from the API
-//     let randomWordsString = randomWordsArray.join(" "); // Convert array of words into single string
-
-//     // Split the string into <span> elements to allow changing colours of individual chars
-//     let randomWordsChars = randomWordsString.split("").map((targetChar) => {
-//         return "<span class='target-chars'>" + targetChar + "</span>"; // Return the char <span> element
-//     });
-
-//     targetText.innerHTML = randomWordsChars.join(""); // Set target text to the string of random words
-// }
+// Reset the typing test when clicking the shortcut hint
+restart.onclick = function () {
+    resetTest();
+};
 
 // Fetch random words from the API
 const getRandomWords = async () => {
@@ -132,10 +122,10 @@ const startTest = () => {
     if (timer.value === "" || timer.value < 0) {
         timer.value = 60;
     }
-    startedTest = true;
     timer.setAttribute("disabled", "true");
     timer.style.color = "var(--main-grey)";
     timer.style.border = "0.1rem solid transparent";
+    startedTest = true;
     startTimer();
 }
 
@@ -143,11 +133,10 @@ const startTest = () => {
 const endTest = () => {
     clearInterval(typingTimer);
     userText.setAttribute("readonly", "true");
-    // timer.removeAttribute("disabled");
     timer.style.color = "var(--off-grey)";
-    // timer.style.border = "0.1rem solid var(--side-grey)";
 
     // Calculate the WPM (incorrect > correct -> negative WPM -> 0)
-    wpm.value = Math.max(Math.round((document.querySelectorAll(".correct").length - document.querySelectorAll(".incorrect").length) / (time) / 5 * 60), 0);
+    totalChars = document.querySelectorAll(".correct").length - document.querySelectorAll(".incorrect").length;
+    wpm.value = Math.max(Math.round(totalChars / 5 / (time / 60)), 0);
     wpm.style.border = "0.1rem solid var(--side-grey)";
 }
