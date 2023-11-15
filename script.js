@@ -1,5 +1,6 @@
 // Constants
 const randomWordsAPI = "https://random-word-api.herokuapp.com/word?number=100";
+const textRegion = document.getElementsByClassName("text-region");
 const userText = document.getElementById("user-text");
 const targetText = document.getElementById("target-text");
 const timer = document.getElementById("timer");
@@ -18,16 +19,69 @@ window.onload = () => {
     getRandomWords();
 }
 
-// Keyboard inputs (e)
+// Keyboard inputs for the entire webpage
 document.addEventListener("keydown", function (e) {
-    // Add functions below that require key inputs
-    keyReset(e);
-}, false);
+    // Reset the typing test by pressing ESC
+    if (e.key === "Escape") {
+        resetTest();
+    }
+});
 
-// Reset the typing test when clicking the shortcut hint
-restart.onclick = function () {
-    resetTest();
-};
+// Disable moving text cursor with mouse click
+userText.addEventListener("mousedown", function (e) {
+    if (startedTest) {
+        e.preventDefault();
+    }
+});
+
+// Disable moving text cursor with arrow keys and full word delete
+userText.addEventListener("keydown", function (e) {
+    if (startedTest) {
+        if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "ArrowRight" || e.key === "ArrowDown" || (e.ctrlKey || e.metaKey) && e.key === "Backspace") {
+            e.preventDefault();
+        }
+    }
+});
+
+// Darken text colour when text region is focused
+userText.addEventListener("focus", function () {
+    if (!startedTest) {
+        textRegion[0].classList.remove("unfocused");
+    }
+});
+
+// Lighten text colour when text region is unfocused
+userText.addEventListener("blur", function () {
+    if (!startedTest) {
+        textRegion[0].classList.add("unfocused");
+    }
+});
+
+// Check if the user text matches the target text
+userText.addEventListener("input", () => {
+    let userChars; // The chars of the user text
+    let targetChars; // The chars of the target text
+
+    targetChars = document.querySelectorAll(".target-chars");
+    targetChars = Array.from(targetChars); // Create an array from <span> elements
+    userChars = userText.value.split(""); // Array of user text
+
+    targetChars.forEach((char, index) => {
+        if (char.innerText === userChars[index]) { // If user text char matches target text char
+            char.classList.add("correct");
+        } else if (userChars[index] == null) { // No user text written
+            if (char.classList.contains("correct")) {
+                char.classList.remove("correct");
+            } else {
+                char.classList.remove("incorrect");
+            }
+        } else { // If user text char does not match target text char
+            if (!char.classList.contains("incorrect")) {
+                char.classList.add("incorrect");
+            }
+        }
+    });
+});
 
 // Fetch random words from the API
 const getRandomWords = async () => {
@@ -49,32 +103,6 @@ const getRandomWords = async () => {
     dataSide = await response.json(); // Queue next set of random words (for reset performance)
 }
 
-// Check if the user text matches the target text
-userText.addEventListener("input", () => {
-    let userChars; // The chars of the user text
-    let targetChars; // The chars of the target text
-
-    targetChars = document.querySelectorAll(".target-chars");
-    targetChars = Array.from(targetChars); // Create an array from <span> elements
-    userChars = userText.value.split(""); // Array of user text
-
-    targetChars.forEach((char, index) => {
-        if (char.innerText == userChars[index]) { // If user text char matches target text char
-            char.classList.add("correct");
-        } else if (userChars[index] == null) { // No user text written
-            if (char.classList.contains("correct")) {
-                char.classList.remove("correct");
-            } else {
-                char.classList.remove("incorrect");
-            }
-        } else { // If user text char does not match target text char
-            if (!char.classList.contains("incorrect")) {
-                char.classList.add("incorrect");
-            }
-        }
-    });
-});
-
 // Set the timer
 const startTimer = () => {
     typingTimer = setInterval(updateTimer, 1000);
@@ -87,13 +115,6 @@ function updateTimer() {
     } else {
         timer.value--;
         time++;
-    }
-}
-
-// Reset the typing test by pressing ESC
-function keyReset(e) {
-    if (e.keyCode == 27 && startedTest) {
-        resetTest();
     }
 }
 
@@ -114,13 +135,18 @@ const resetTest = () => {
     time = 0;
 }
 
+// Reset the typing test when clicking the shortcut hint
+restart.onclick = function () {
+    resetTest();
+};
+
 // Start the typing test
 const startTest = () => {
     if (startedTest) {
         return;
     }
     if (timer.value === "" || timer.value < 0) {
-        timer.value = 60;
+        timer.value = 30;
     }
     timer.setAttribute("disabled", "true");
     timer.style.color = "var(--main-grey)";
@@ -136,7 +162,8 @@ const endTest = () => {
     timer.style.color = "var(--off-grey)";
 
     // Calculate the WPM (incorrect > correct -> negative WPM -> 0)
-    totalChars = document.querySelectorAll(".correct").length - document.querySelectorAll(".incorrect").length;
+    // totalChars = document.querySelectorAll(".correct").length - document.querySelectorAll(".incorrect").length;
+    totalChars = document.querySelectorAll(".correct").length;
     wpm.value = Math.max(Math.round(totalChars / 5 / (time / 60)), 0);
     wpm.style.border = "0.1rem solid var(--side-grey)";
 }

@@ -13,7 +13,7 @@
             display: none;
         }
 
-        #user-text::-webkit-scrollbar,
+        textarea::-webkit-scrollbar,
         #target-text::-webkit-scrollbar {
             display: none;
         }
@@ -21,34 +21,35 @@
 </head>
 
 <body>
-    <nav class="page-nav">
+    <nav>
         <a href="index.html"><img id="logo" src="images/TouchType.png" alt="TouchType logo"></a>
         <br>
         <ul>
             <li><a href="index.html">Typing Test</a></li>
-            <!-- <li><a href="">Keyboard Tester</a></li> -->
-            <!-- <li><a href="">Rhythm Game</a></li> -->
+            <!-- <li><a href="">Keyboard Test</a></li> -->
+            <!-- <li><a href="">Reaction Time</a></li> -->
         </ul>
     </nav>
 
     <main>
-        <div id="target-text"></div>
-        <br>
         <label for="timer">Time:</label>
         <input type="number" name="timer" id="timer" onfocus="this.value=''" value="30">
         <label for="wpm">WPM:</label>
         <input type="number" name="wpm" id="wpm" disabled>
         <br>
-        <textarea name="user-text" id="user-text" placeholder="Type here to begin" onkeydown="startTest()"
+        <div class="text-region unfocused">
+            <div id="target-text"></div>
+            <textarea name="user-text" id="user-text" onkeydown="startTest()"
             spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
+        </div>
         <br>
         <p id="restart"><kbd>Esc</kbd> Restart</p>
     </main>
 
-    <footer class="page-footer">
+    <footer>
         <span class="about">
-            <a href="https://github.com/alan-w-u "><img src="images/github.png" alt="GitHub"></a>
-            <a href="https://www.linkedin.com/in/alan-w-u"><img src="images/linkedin.png" alt="LinkedIn"></a>
+            <a href="https://github.com/alan-w-u" target="_blank"><img src="images/github.png" alt="GitHub"></a>
+            <a href="https://www.linkedin.com/in/alan-w-u" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
         </span>
     </footer>
 

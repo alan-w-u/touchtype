@@ -7,6 +7,7 @@
     --side-brown: rgb(182, 158, 123); /* #b69e7b | rgb(182, 158, 123) */
 }
 
+
 /* Style for main HTML/semantic (section) elements */
 * {
     margin: 0;
@@ -19,10 +20,11 @@
 
 body {
     background-color: var(--main-brown);
+    user-select: none;
 }
 
 nav {
-    margin: 0.25rem 0rem 1rem 0rem;
+    margin: 0.25rem 0rem 3rem 0rem;
 }
 
 main {
@@ -32,15 +34,16 @@ main {
 main, p {
     display: inline;
     position: fixed;
-    transform: translateX(-50%);
+    transform: translate(-50%);
     left: 50%;
     right: auto;
 }
 
 footer {
-    position: absolute;
-    margin-top: auto;
+    position: fixed;
+    bottom: 0;
 }
+
 
 /* Style for general HTML objects */
 a {
@@ -67,21 +70,27 @@ kbd {
     font-weight: bold;
     padding: 0.25rem 0.5rem;
     white-space: nowrap;
-  }
+}
+
 
 /* Style for classes */
-.about {
-    display: inline;
-    position: fixed;
-    bottom: 0.5rem;
+.text-region {
+    position: relative;
+    width: 65vw;
+    height: 20rem;
     transform: translate(-50%);
     left: 50%;
     right: auto;
+    font-size: 1.3rem;
+}
+
+.text-region.unfocused .target-chars {
+    color: var(--off-grey);
 }
 
 .target-chars {
+    font-size: inherit;
     color: var(--side-grey);
-    margin: 1rem 0rem;
 }
 
 .correct {
@@ -92,8 +101,25 @@ kbd {
     color: rgb(255, 0, 0);
 }
 
+.about {
+    display: inline;
+    position: fixed;
+    transform: translate(-50%);
+    left: 50%;
+    right: auto;
+    bottom: 0.5rem;
+}
+
+/* Hide the about when viewport too small */
+@media screen and (max-height: 41rem) {
+    .about img {
+        display: none;
+    }
+}
+
 /* Style for id */
 #logo {
+    position: fixed;
     width: 15rem;
     height: auto;
     float: left;
@@ -101,10 +127,12 @@ kbd {
 }
 
 #user-text {
-    width: 50rem;
-    height: 15rem;
-    padding: 1rem;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    padding: 0.5rem 1rem;
     background: rgba(0, 0, 0, 0.025);
+    font-size: inherit;
     font-weight: bold;
     resize: none;
     border: 0.1rem solid var(--side-grey);
@@ -112,13 +140,16 @@ kbd {
     box-sizing: border-box;
     outline-style: none;
     overflow: scroll;
-    margin: 1rem 0rem;
+    opacity: 0;
+    /* margin: 0rem 0rem; */
 }
 
 #target-text {
-    width: 50rem;
-    height: 12rem;
-    padding: 1rem;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    padding: 0.5rem 1rem;
+    font-size: inherit;
     font-weight: bold;
     resize: none;
     border: 0.1rem solid var(--side-grey);
@@ -126,7 +157,8 @@ kbd {
     box-sizing: border-box;
     outline-style: none;
     overflow: scroll;
-    margin: 0rem 0rem 0.5rem 0rem;
+    opacity: 100;
+    /* margin: 0rem 0rem; */
 }
 
 #timer {
@@ -139,7 +171,7 @@ kbd {
     border: 0.1rem solid var(--side-grey);
     border-radius: 0.5rem;
     outline-style: none;
-    margin: 0.25rem 3rem 0rem 0rem;
+    margin: 0.25rem 3rem 0.5rem 0rem;
 }
 
 #wpm {
@@ -152,7 +184,7 @@ kbd {
     border: 0.1rem solid transparent;
     border-radius: 0.5rem;
     outline-style: none;
-    margin: 0.25rem 0rem 0rem 0rem;
+    margin: 0.25rem 0rem 0.5rem 0rem;
 }
 
 #restart {
@@ -168,9 +200,13 @@ kbd {
     outline-style: none;
 }
 
+
 /* Style for selectors */
 nav ul {
     display: inline;
+    position: fixed;
+    left: 15rem;
+    right: auto;
     list-style-type: none;
     overflow: hidden;
 }
@@ -200,7 +236,7 @@ footer img {
     margin: 0.05rem;
 }
 
-footer span a img:hover {
+footer img:hover {
     background-color: var(--side-brown);
     border-radius: 0.5rem;
 }
