@@ -5,11 +5,12 @@ const targetText = document.getElementById("target-text");
 const timer = document.getElementById("timer");
 const wpm = document.getElementById("wpm");
 const restart = document.getElementById("restart");
+const defaultTime = 30; // The default time of the typing test
 
 // Variables
 let startedTest = false;
-let initialTime = timer.value;
-let time = 0;
+let initialTime = timer.value; // Value stored in the time input
+let testTime = 0; // Time taken for the test
 let dataMain; // The random word data being displayed
 let dataSide; // A queued set of random words (for reset performance)
 
@@ -18,21 +19,20 @@ const randomWordsAPI = "https://random-word-api.herokuapp.com/word?number=100";
 
 // Actions when loading the webpage
 window.onload = () => {
+    timer.value = defaultTime;
     getRandomWords();
 }
 
 // Returns the current webpage 
 function getPage() {
-    var path = window.location.pathname;
-    var page = path.split("/").pop();
-    return page;
+    return window.location.pathname.split("/").pop();
 }
 
-// Keyboard inputs for the entire webpage
+// Keyboard inputs for the webpage
 document.addEventListener("keydown", function (e) {
     // Reset the typing test by pressing ESC
     if (e.key === "Escape") {
-        resetTest();
+        resetTypingTest();
     }
 });
 
@@ -54,14 +54,14 @@ userText.addEventListener("keydown", function (e) {
 });
 
 // Darken text colour when text region is focused
-userText.addEventListener("focus", function () {
+userText.addEventListener("focusin", function () {
     if (!startedTest) {
         textRegion[0].classList.remove("unfocused");
     }
 });
 
 // Lighten text colour when text region is unfocused
-userText.addEventListener("blur", function () {
+userText.addEventListener("focusout", function () {
     if (!startedTest) {
         textRegion[0].classList.add("unfocused");
     }
@@ -124,12 +124,12 @@ function updateTimer() {
         endTest();
     } else {
         timer.value--;
-        time++;
+        testTime++;
     }
 }
 
 // Reset the typing test
-const resetTest = () => {
+const resetTypingTest = () => {
     clearInterval(typingTimer);
     dataMain = dataSide;
     getRandomWords();
@@ -142,14 +142,15 @@ const resetTest = () => {
     wpm.value = "";
     wpm.style.border = "0.1rem solid transparent";
     startedTest = false;
-    time = 0;
+    testTime = 0;
 }
 
 // Reset the typing test when clicking the shortcut hint
 restart.onclick = function () {
     switch (getPage()) {
         case "index.html":
-            resetTest();
+            textRegion[0].classList.add("unfocused");
+            resetTypingTest();
     }
 };
 
@@ -158,9 +159,19 @@ const startTest = () => {
     if (startedTest) {
         return;
     }
-    if (timer.value === "" || timer.value < 0) {
-        timer.value = 30;
+
+    initialTime = parseInt(timer.value);
+
+    if (initialTime < 0) {
+        initialTime = Math.abs(initialTime);
+        timer.value = initialTime;
     }
+
+    if (isNaN(initialTime)) {
+        initialTime = defaultTime;
+        timer.value = initialTime;
+    }
+    
     timer.setAttribute("disabled", "true");
     timer.style.color = "var(--main-grey)";
     timer.style.border = "0.1rem solid transparent";
@@ -177,6 +188,6 @@ const endTest = () => {
     // Calculate the WPM (incorrect > correct -> negative WPM -> 0)
     // totalChars = document.querySelectorAll(".correct").length - document.querySelectorAll(".incorrect").length;
     totalChars = document.querySelectorAll(".correct").length;
-    wpm.value = Math.max(Math.round(totalChars / 5 / (time / 60)), 0);
+    wpm.value = Math.max(Math.round(totalChars / 5 / (testTime / 60)), 0);
     wpm.style.border = "0.1rem solid var(--side-grey)";
 }
