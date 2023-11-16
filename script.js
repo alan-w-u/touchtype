@@ -1,5 +1,4 @@
 // Constants
-const randomWordsAPI = "https://random-word-api.herokuapp.com/word?number=100";
 const textRegion = document.getElementsByClassName("text-region");
 const userText = document.getElementById("user-text");
 const targetText = document.getElementById("target-text");
@@ -14,9 +13,19 @@ let time = 0;
 let dataMain; // The random word data being displayed
 let dataSide; // A queued set of random words (for reset performance)
 
+// API
+const randomWordsAPI = "https://random-word-api.herokuapp.com/word?number=100";
+
 // Actions when loading the webpage
 window.onload = () => {
     getRandomWords();
+}
+
+// Returns the current webpage 
+function getPage() {
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+    return page;
 }
 
 // Keyboard inputs for the entire webpage
@@ -31,6 +40,7 @@ document.addEventListener("keydown", function (e) {
 userText.addEventListener("mousedown", function (e) {
     if (startedTest) {
         e.preventDefault();
+        userText.focus();
     }
 });
 
@@ -137,7 +147,10 @@ const resetTest = () => {
 
 // Reset the typing test when clicking the shortcut hint
 restart.onclick = function () {
-    resetTest();
+    switch (getPage()) {
+        case "index.html":
+            resetTest();
+    }
 };
 
 // Start the typing test
