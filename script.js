@@ -6,16 +6,18 @@ const timer = document.getElementById("timer");
 const wpm = document.getElementById("wpm");
 const restart = document.getElementById("restart");
 const defaultTime = 30; // The default time of the typing test
+const numRandomWords = 100; // The number of random words to be called by the API
 
 // Variables
 let startedTest = false;
 let initialTime = timer.value; // Value stored in the time input
 let testTime = 0; // Time taken for the test
+let correctStored = 0; // Number of correct characters stored when random words refreshed on the same test
 let dataMain; // The random word data being displayed
 let dataSide; // A queued set of random words (for reset performance)
 
 // API
-const randomWordsAPI = "https://random-word-api.herokuapp.com/word?number=100";
+const randomWordsAPI = "https://random-word-api.herokuapp.com/word?number=" + numRandomWords;
 
 // Actions when loading the webpage
 window.onload = () => {
@@ -91,6 +93,13 @@ userText.addEventListener("input", () => {
             }
         }
     });
+
+    // Generate new set of words when the visible words have been filled
+    if (userText.value.length === targetChars.length) {
+        correctStored += document.querySelectorAll(".correct").length;
+        switchRandomWords();
+        userText.value = "";
+    }
 });
 
 // Fetch random words from the API
@@ -109,8 +118,35 @@ const getRandomWords = async () => {
     });
 
     targetText.innerHTML = randomWordsChars.join(""); // Set target text to the string of random words
+    removeOverflow();
+
     const response = await fetch(randomWordsAPI);
     dataSide = await response.json(); // Queue next set of random words (for reset performance)
+}
+
+// Switch current words with queued ones
+function switchRandomWords() {
+    dataMain = dataSide;
+    getRandomWords();
+}
+
+// Remove overflow of words
+function removeOverflow() {
+    while (true) {
+        const lastElem = targetText.lastElementChild;
+
+        if (lastElem) {
+            const lastChar = lastElem.innerText.trim();
+
+            if (targetText.scrollHeight > targetText.clientHeight || (lastChar !== " " && lastChar !== "")) {
+                targetText.removeChild(lastElem);
+            } else {
+                break;
+            }
+        } else {
+            break;
+        }
+    }
 }
 
 // Set the timer
@@ -131,18 +167,18 @@ function updateTimer() {
 // Reset the typing test
 const resetTypingTest = () => {
     clearInterval(typingTimer);
-    dataMain = dataSide;
-    getRandomWords();
+    switchRandomWords();
     userText.value = "";
     userText.removeAttribute("readonly");
     timer.value = initialTime;
     timer.removeAttribute("disabled");
-    timer.style.color = "var(--side-grey)";
+    timer.style.color = "var(--off-grey)";
     timer.style.border = "0.1rem solid var(--side-grey)";
     wpm.value = "";
     wpm.style.border = "0.1rem solid transparent";
     startedTest = false;
     testTime = 0;
+    correctStored = 0;
 }
 
 // Reset the typing test when clicking the shortcut hint
@@ -171,6 +207,8 @@ const startTest = () => {
         initialTime = defaultTime;
         timer.value = initialTime;
     }
+
+    removeOverflow();
     
     timer.setAttribute("disabled", "true");
     timer.style.color = "var(--main-grey)";
@@ -184,10 +222,9 @@ const endTest = () => {
     clearInterval(typingTimer);
     userText.setAttribute("readonly", "true");
     timer.style.color = "var(--off-grey)";
+    wpm.style.border = "0.1rem solid var(--side-grey)";
 
     // Calculate the WPM (incorrect > correct -> negative WPM -> 0)
-    // totalChars = document.querySelectorAll(".correct").length - document.querySelectorAll(".incorrect").length;
     totalChars = document.querySelectorAll(".correct").length;
-    wpm.value = Math.max(Math.round(totalChars / 5 / (testTime / 60)), 0);
-    wpm.style.border = "0.1rem solid var(--side-grey)";
+    wpm.value = (testTime > 0)? Math.max(Math.round((totalChars + correctStored) / 5 / (testTime / 60)), 0) : 0;
 }
