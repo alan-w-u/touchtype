@@ -17,7 +17,8 @@ let dataMain; // The random word data being displayed
 let dataSide; // A queued set of random words (for reset performance)
 
 // API
-const randomWordsAPI = "https://random-word-api.herokuapp.com/word?number=" + numRandomWords;
+const randomWordsAPI = "https://random-word-api.vercel.app/api?words=" + numRandomWords; // More common words API (faster)
+// const randomWordsAPI = "https://random-word-api.herokuapp.com/word?number=" + numRandomWords; // More uncommon words API (slower)
 
 // Actions when loading the webpage
 window.onload = () => {
