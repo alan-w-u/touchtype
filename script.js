@@ -6,7 +6,7 @@ const timer = document.getElementById("timer");
 const wpm = document.getElementById("wpm");
 const restart = document.getElementById("restart");
 const defaultTime = 30; // The default time of the typing test
-const numRandomWords = 100; // The number of random words to be called by the API
+const numRandomWords = Math.round(window.screen.height / 9); // The number of random words to be called by the API
 
 // Variables
 let startedTest = false;

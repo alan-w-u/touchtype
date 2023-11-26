@@ -1,3 +1,15 @@
+/* 
+Order for CSS Elements:
+1. Display (display, box-sizing, visibility, z-index)
+2. Positioning (postion, top, left, right)
+3. Size (width, height, padding, margin)
+4. Border (border, border-radius, outline, resize)
+5. Background (background, box-shadow)
+6. Text (font-family, font-size, color, line-heigth, whitespace, text-align)
+7. Transforms and Transitions (transform, transitions)
+8. Else
+*/
+
 /* Custom Colours */
 :root {
     --main-grey: rgb(50, 50, 50); /* #323232 | rgb(50, 50, 50) */
@@ -7,15 +19,27 @@
     --side-brown: rgb(182, 158, 123); /* #b69e7b | rgb(182, 158, 123) */
 }
 
+/* Remove scroll button for number input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+}
+
+/* Remove scroll bar for text area */
+textarea::-webkit-scrollbar,
+#target-text::-webkit-scrollbar {
+    display: none;
+}
+
 
 /* Style for main HTML/semantic (section) elements */
 * {
     margin: 0;
+    box-sizing: border-box;
     font-family: Verdana, Arial, sans-serif;
-    color: var(--main-grey);
     font-size: 1.1rem;
     font-weight: bold;
-    box-sizing: border-box;
+    color: var(--main-grey);
 }
 
 body {
@@ -47,9 +71,9 @@ footer {
 
 /* Style for general HTML objects */
 a {
-    color: var(--side-grey);
     font-size: 1rem;
     font-weight: bold;
+    color: var(--side-grey);
     text-decoration: none;
 }
 
@@ -78,10 +102,12 @@ kbd {
     position: relative;
     width: 65vw;
     height: 20rem;
-    transform: translate(-50%);
+    /* transform: translate(-50%);
     left: 50%;
-    right: auto;
+    right: auto; */
     font-size: 1.3rem;
+    font-weight: bold;
+    /* resize: none; */
 }
 
 .text-region.unfocused .target-chars {
@@ -104,10 +130,10 @@ kbd {
 .about {
     display: inline;
     position: fixed;
+    bottom: 0.5rem;
     transform: translate(-50%);
     left: 50%;
     right: auto;
-    bottom: 0.5rem;
 }
 
 /* Hide the about when viewport too small */
@@ -122,7 +148,6 @@ kbd {
     position: fixed;
     width: 15rem;
     height: auto;
-    float: left;
     margin: 0.5rem 1rem;
 }
 
@@ -130,61 +155,72 @@ kbd {
     position: absolute;
     width: inherit;
     height: inherit;
-    padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.025);
-    font-size: inherit;
-    font-weight: bold;
-    resize: none;
+    padding: 0.3rem 1rem;
+    margin: inherit;
+    opacity: 0;
     border: 0.1rem solid var(--side-grey);
     border-radius: 1rem;
-    box-sizing: border-box;
-    outline-style: none;
+    outline: none;
+    background: rgba(0, 0, 0, 0.025);
+    font-size: inherit;
+    font-weight: inherit;
+    resize: none;
     overflow: scroll;
-    opacity: 0;
-    /* margin: 0rem 0rem; */
 }
 
 #target-text {
     position: absolute;
     width: inherit;
     height: inherit;
-    padding: 0.5rem 1rem;
-    font-size: inherit;
-    font-weight: bold;
-    resize: none;
+    padding: 0.3rem 1rem;
+    margin: inherit;
     border: 0.1rem solid var(--side-grey);
     border-radius: 1rem;
-    box-sizing: border-box;
-    outline-style: none;
+    outline: none;
+    resize: none;
+    font-size: inherit;
+    font-weight: inherit;
     overflow: scroll;
-    opacity: 100;
-    /* margin: 0rem 0rem; */
+}
+
+#keyboard-input {
+    position: relative;
+    width: 65vw;
+    height: 24rem;
+    padding: 0.3rem 1rem;
+    border: 0.1rem solid var(--side-grey);
+    border-radius: 1rem;
+    outline: none;
+    resize: none;
+    background: none;
+    font-size: 1rem;
+    overflow: scroll;
 }
 
 #timer {
     width: 5rem;
     height: auto;
-    color: var(--off-grey);
-    text-align: center;
     padding: 0.5rem;
-    background: rgba(0, 0, 0, 0.025);
+    margin: 0.25rem 3rem 0.5rem 0rem;
     border: 0.1rem solid var(--side-grey);
     border-radius: 0.5rem;
-    outline-style: none;
-    margin: 0.25rem 3rem 0.5rem 0rem;
+    outline: none;
+    background: rgba(0, 0, 0, 0.025);
+    color: var(--off-grey);
+    text-align: center;
 }
 
 #wpm {
     width: 5rem;
     height: auto;
-    color: var(--main-grey);
-    text-align: center;
     padding: 0.5rem;
-    background: rgba(0, 0, 0, 0.025);
+    margin: 0.25rem 0rem 0.5rem 0rem;
     border: 0.1rem solid transparent;
     border-radius: 0.5rem;
-    outline-style: none;
-    margin: 0.25rem 0rem 0.5rem 0rem;
+    outline: none;
+    background: rgba(0, 0, 0, 0.025);
+    color: var(--main-grey);
+    text-align: center;
 }
 
 #restart {
@@ -192,12 +228,10 @@ kbd {
 }
 
 #restart:hover {
-    cursor: pointer;
-    color: white;
-    background-color: var(--side-brown);
-    padding: 0.5rem;
     border-radius: 0.5rem;
-    outline-style: none;
+    background-color: var(--side-brown);
+    color: white;
+    cursor: pointer;
 }
 
 
@@ -217,16 +251,13 @@ nav ul li {
 
 nav ul li a {
     display: block;
-    text-align: center;
-    font-size: 1rem;
     padding: 1rem;
-    border-radius: 0.75rem;
-    box-sizing: border-box;
 }
 
 nav ul li a:hover {
-    color: white;
+    border-radius: 0.75rem;
     background-color: var(--side-brown); 
+    color: white;
 }
 
 footer img {
@@ -237,7 +268,7 @@ footer img {
 }
 
 footer img:hover {
-    background-color: var(--side-brown);
     border-radius: 0.5rem;
+    background-color: var(--side-brown);
 }
 
