@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TouchType - Typing Test</title>
+    <meta name="description" content="TouchType is a website for all your keyboard needs!">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="typing-test.html"><img id="logo" src="images/TouchType.png" alt="TouchType logo"></a>
+        <br>
+        <ul>
+            <li><a href="typing-test.html">Typing Test</a></li>
+            <!-- <li><a href="keyboard-test.html">Keyboard Test</a></li> -->
+            <!-- <li><a href="">Reaction Time</a></li> -->
+        </ul>
+    </nav>
+    <main>
+        <label for="timer">Time:</label>
+        <input type="number" name="timer" id="timer" onfocus="this.value=''">
+        <label for="wpm">WPM:</label>
+        <input type="number" name="wpm" id="wpm" disabled>
+        <br>
+        <div class="text-region unfocused">
+            <div id="target-text"></div>
+            <textarea name="user-text" id="user-text" onkeydown="startTest()"
+            spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
+        </div>
+        <br>
+        <p id="restart"><kbd>Esc</kbd> Restart</p>
+    </main>
+    <footer>
+        <span class="about">
+            <a href="https://github.com/alan-w-u" target="_blank"><img src="images/github.png" alt="GitHub"></a>
+            <a href="https://www.linkedin.com/in/alan-w-u" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
+        </span>
+    </footer>
+    <script src="typing-test.js"></script>
+</body>
+</html>
