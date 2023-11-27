@@ -10,6 +10,15 @@ Order for CSS Elements:
 8. Else
 */
 
+/* 
+Order for CSS Documentation
+1. Main HTML/Semantic (Section) Elements
+2. General HTML Objects
+3. Classes
+4. ID
+5. Selectors
+*/
+
 /* Custom Colours */
 :root {
     --main-grey: rgb(50, 50, 50); /* #323232 | rgb(50, 50, 50) */
@@ -31,8 +40,7 @@ textarea::-webkit-scrollbar,
     display: none;
 }
 
-
-/* Style for main HTML/semantic (section) elements */
+/* Main HTML/Semantic (Section) Elements */
 * {
     margin: 0;
     box-sizing: border-box;
@@ -68,8 +76,7 @@ footer {
     bottom: 0;
 }
 
-
-/* Style for general HTML objects */
+/* General HTML Objects */
 a {
     font-size: 1rem;
     font-weight: bold;
@@ -96,37 +103,7 @@ kbd {
     white-space: nowrap;
 }
 
-
-/* Style for classes */
-.text-region {
-    position: relative;
-    width: 65vw;
-    height: 20rem;
-    /* transform: translate(-50%);
-    left: 50%;
-    right: auto; */
-    font-size: 1.3rem;
-    font-weight: bold;
-    /* resize: none; */
-}
-
-.text-region.unfocused .target-chars {
-    color: var(--off-grey);
-}
-
-.target-chars {
-    font-size: inherit;
-    color: var(--side-grey);
-}
-
-.correct {
-    color: rgb(50, 150, 50);
-}
-
-.incorrect {
-    color: rgb(250, 50, 50);
-}
-
+/* Classes */
 .about {
     display: inline;
     position: fixed;
@@ -136,14 +113,7 @@ kbd {
     right: auto;
 }
 
-/* Hide the about when viewport too small */
-@media screen and (max-height: 41rem) {
-    .about img {
-        display: none;
-    }
-}
-
-/* Style for id */
+/* ID */
 #logo {
     position: fixed;
     width: 15rem;
@@ -151,91 +121,7 @@ kbd {
     margin: 0.5rem 1rem;
 }
 
-#user-text {
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    padding: 0.3rem 1rem;
-    margin: inherit;
-    opacity: 0;
-    border: 0.1rem solid var(--side-grey);
-    border-radius: 1rem;
-    outline: none;
-    background: rgba(0, 0, 0, 0.025);
-    font-size: inherit;
-    font-weight: inherit;
-    resize: none;
-    overflow: scroll;
-}
-
-#target-text {
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    padding: 0.3rem 1rem;
-    margin: inherit;
-    border: 0.1rem solid var(--side-grey);
-    border-radius: 1rem;
-    outline: none;
-    resize: none;
-    font-size: inherit;
-    font-weight: inherit;
-    overflow: scroll;
-}
-
-#keyboard-input {
-    position: relative;
-    width: 65vw;
-    height: 24rem;
-    padding: 0.3rem 1rem;
-    border: 0.1rem solid var(--side-grey);
-    border-radius: 1rem;
-    outline: none;
-    resize: none;
-    background: none;
-    font-size: 1rem;
-    overflow: scroll;
-}
-
-#timer {
-    width: 5rem;
-    height: auto;
-    padding: 0.5rem;
-    margin: 0.25rem 3rem 0.5rem 0rem;
-    border: 0.1rem solid var(--side-grey);
-    border-radius: 0.5rem;
-    outline: none;
-    background: rgba(0, 0, 0, 0.025);
-    color: var(--off-grey);
-    text-align: center;
-}
-
-#wpm {
-    width: 5rem;
-    height: auto;
-    padding: 0.5rem;
-    margin: 0.25rem 0rem 0.5rem 0rem;
-    border: 0.1rem solid transparent;
-    border-radius: 0.5rem;
-    outline: none;
-    background: rgba(0, 0, 0, 0.025);
-    color: var(--main-grey);
-    text-align: center;
-}
-
-#restart {
-    padding: 0.5rem;
-}
-
-#restart:hover {
-    border-radius: 0.5rem;
-    background-color: var(--side-brown);
-    color: white;
-    cursor: pointer;
-}
-
-
-/* Style for selectors */
+/* Selectors */
 nav ul {
     display: inline;
     position: fixed;
@@ -271,4 +157,3 @@ footer img:hover {
     border-radius: 0.5rem;
     background-color: var(--side-brown);
 }
-
