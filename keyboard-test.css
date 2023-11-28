@@ -12,17 +12,90 @@ Order for CSS Elements:
 8. Else
 */
 
+/* Classes */
+.key {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 3vw; /* Default 1U = 3rem */
+    padding: 0.25vw;
+    margin: 0.25vw 0.1vw;
+    border: 0.1rem solid var(--side-grey);
+    border-radius: 0.25rem;
+    font-size: 1.1vw;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* 1U = 3rem */
+.key-1_25u {
+    width: 3.75vw;
+}
+
+.key-1_5u {
+    width: 4.5vw;
+}
+
+.key-1_75u {
+    width: 5.25vw;
+}
+
+.key-2u {
+    width: 6vw;
+}
+
+.key-2_25u {
+    width: 6.75vw;
+}
+
+.key-2_75u {
+    width: 8.25vw;
+}
+
+.key-6_25u {
+    width: 18.75vw;
+}
+
+.key-blank {
+    opacity: 0;
+}
+
+.press {
+    background-color: rgba(50, 150, 50, 0.75);
+}
+
+.pressed {
+    background-color: rgba(50, 150, 50, 0.25);
+}
+
 /* ID */
+#keyboard-display {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    white-space: nowrap;
+    width: 60vw;
+    height: auto;
+    padding: 2vh 0.5vw;
+    margin-top: 2rem;
+    border: 0.1rem solid var(--side-grey);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
 #keyboard-input {
     position: relative;
-    width: 65vw;
-    height: 24rem;
+    transform: translate(-50%);
+    left: 50%;
+    right: auto;
+    width: auto;
+    height: auto;
     padding: 0.3rem 1rem;
+    margin-top: 3rem;
     border: 0.1rem solid var(--side-grey);
     border-radius: 1rem;
     outline: none;
-    resize: none;
     background: none;
-    font-size: 1rem;
+    text-align: center;
     overflow: scroll;
 }
