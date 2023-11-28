@@ -42,6 +42,7 @@ textarea::-webkit-scrollbar,
 
 /* Main HTML/Semantic (Section) Elements */
 * {
+    user-select: none;
     margin: 0;
     box-sizing: border-box;
     font-family: Verdana, Arial, sans-serif;
@@ -52,7 +53,6 @@ textarea::-webkit-scrollbar,
 
 body {
     background-color: var(--main-brown);
-    user-select: none;
 }
 
 nav {
@@ -60,15 +60,12 @@ nav {
 }
 
 main {
-    margin: 3rem 0rem
-}
-
-main, p {
     display: inline;
     position: fixed;
     transform: translate(-50%);
     left: 50%;
     right: auto;
+    margin: 3rem 0rem
 }
 
 footer {
@@ -119,6 +116,22 @@ kbd {
     width: 15rem;
     height: auto;
     margin: 0.5rem 1rem;
+}
+
+#restart {
+    display: inline;
+    position: fixed;
+    transform: translate(-50%);
+    left: 50%;
+    right: auto;
+    padding: 0.5rem;
+}
+
+#restart:hover {
+    border-radius: 0.5rem;
+    background-color: var(--side-brown);
+    color: white;
+    cursor: pointer;
 }
 
 /* Selectors */

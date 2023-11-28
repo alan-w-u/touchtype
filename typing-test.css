@@ -24,21 +24,17 @@ Order for CSS Elements:
     position: relative;
     width: 65vw;
     height: 20rem;
-    /* transform: translate(-50%);
-    left: 50%;
-    right: auto; */
     font-size: 1.3rem;
     font-weight: bold;
-    /* resize: none; */
 }
 
-.text-region.unfocused .target-chars {
-    color: var(--off-grey);
-}
-
-.target-chars {
+.target-char {
     font-size: inherit;
     color: var(--side-grey);
+}
+
+.text-region.unfocused .target-char {
+    color: var(--off-grey);
 }
 
 .correct {
@@ -106,15 +102,4 @@ Order for CSS Elements:
     background: rgba(0, 0, 0, 0.025);
     color: var(--main-grey);
     text-align: center;
-}
-
-#restart {
-    padding: 0.5rem;
-}
-
-#restart:hover {
-    border-radius: 0.5rem;
-    background-color: var(--side-brown);
-    color: white;
-    cursor: pointer;
 }

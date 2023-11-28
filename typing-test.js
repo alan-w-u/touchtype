@@ -6,7 +6,7 @@ const timer = document.getElementById("timer");
 const wpm = document.getElementById("wpm");
 const restart = document.getElementById("restart");
 const defaultTime = 30; // The default time of the typing test
-const numRandomWords = Math.round(window.screen.height / 12); // The number of random words to be called by the API
+const numRandomWords = Math.round((targetText.clientWidth + targetText.clientHeight) / 12); // The number of random words to be called by the API
 
 // Variables
 let startedTest = false;
@@ -75,7 +75,7 @@ userText.addEventListener("input", () => {
     let userChars; // The chars of the user text
     let targetChars; // The chars of the target text
 
-    targetChars = document.querySelectorAll(".target-chars");
+    targetChars = document.querySelectorAll(".target-char");
     targetChars = Array.from(targetChars); // Create an array from <span> elements
     userChars = userText.value.split(""); // Array of user text
 
@@ -115,7 +115,7 @@ const getRandomWords = async () => {
 
     // Split the string into <span> elements to allow changing colours of individual chars
     let randomWordsChars = randomWordsString.split("").map((targetChar) => {
-        return "<span class='target-chars'>" + targetChar + "</span>"; // Return the char <span> element
+        return "<span class='target-char'>" + targetChar + "</span>"; // Return the char <span> element
     });
 
     targetText.innerHTML = randomWordsChars.join(""); // Set target text to the string of random words
@@ -185,7 +185,7 @@ const resetTypingTest = () => {
 // Reset the typing test when clicking the shortcut hint
 restart.onclick = function () {
     switch (getPage()) {
-        case "index.html":
+        case "typing-test.html":
             textRegion[0].classList.add("unfocused");
             resetTypingTest();
     }
