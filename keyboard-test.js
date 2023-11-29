@@ -1,5 +1,4 @@
 // Constants
-const keyboardDisplay = document.getElementById("keyboard-display");
 const restart = document.getElementById("restart");
 const keyMap = {};
 
@@ -10,8 +9,7 @@ document.querySelectorAll(".key").forEach(key => {
 
 // Keyboard inputs for the webpage
 document.addEventListener("keydown", function (e) {
-    // Reset the typing test by pressing ESC
-    // e.preventDefault();
+    e.preventDefault();
 
     if (keyMap[e.code]) {
         keyMap[e.code].classList.add("pressed");
