@@ -26,18 +26,13 @@ window.onload = () => {
     getRandomWords();
 }
 
-// Returns the current webpage 
-function getPage() {
-    return window.location.pathname.split("/").pop();
-}
-
 // Keyboard inputs for the webpage
 document.addEventListener("keydown", function (e) {
     // Reset the typing test by pressing ESC
-    if (e.key === "Escape") {
+    if (e.code === "Escape") {
         resetTypingTest();
     }
-});
+})
 
 // Disable moving text cursor with mouse click
 userText.addEventListener("mousedown", function (e) {
@@ -45,30 +40,30 @@ userText.addEventListener("mousedown", function (e) {
         e.preventDefault();
         userText.focus();
     }
-});
+})
 
 // Disable moving text cursor with arrow keys and full word delete
 userText.addEventListener("keydown", function (e) {
     if (startedTest) {
-        if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "ArrowRight" || e.key === "ArrowDown" || (e.ctrlKey || e.metaKey) && e.key === "Backspace") {
+        if (e.code === "ArrowLeft" || e.code === "ArrowUp" || e.code === "ArrowRight" || e.code === "ArrowDown" || (e.ctrlKey || e.metaKey) && e.code === "Backspace") {
             e.preventDefault();
         }
     }
-});
+})
 
 // Darken text colour when text region is focused
 userText.addEventListener("focusin", function () {
     if (!startedTest) {
         textRegion[0].classList.remove("unfocused");
     }
-});
+})
 
 // Lighten text colour when text region is unfocused
 userText.addEventListener("focusout", function () {
     if (!startedTest) {
         textRegion[0].classList.add("unfocused");
     }
-});
+})
 
 // Check if the user text matches the target text
 userText.addEventListener("input", () => {
@@ -93,7 +88,7 @@ userText.addEventListener("input", () => {
                 char.classList.add("incorrect");
             }
         }
-    });
+    })
 
     // Generate new set of words when the visible words have been filled
     if (userText.value.length === targetChars.length) {
@@ -101,7 +96,7 @@ userText.addEventListener("input", () => {
         switchRandomWords();
         userText.value = "";
     }
-});
+})
 
 // Fetch random words from the API
 const getRandomWords = async () => {
@@ -184,12 +179,9 @@ const resetTypingTest = () => {
 
 // Reset the typing test when clicking the shortcut hint
 restart.onclick = function () {
-    switch (getPage()) {
-        case "typing-test.html":
-            textRegion[0].classList.add("unfocused");
-            resetTypingTest();
-    }
-};
+    textRegion[0].classList.add("unfocused");
+    resetTypingTest();
+}
 
 // Start the typing test
 const startTest = () => {
