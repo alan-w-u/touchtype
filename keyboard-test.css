@@ -12,16 +12,28 @@ Order for CSS Elements:
 8. Else
 */
 
+/* Hide the about when viewport too small */
+@media screen and (max-height: 50rem) {
+    .about img {
+        display: none;
+    }
+}
+
 /* Classes */
 .keyboard-all {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-areas: 
+        "main-cluster main-cluster main-cluster"
+        "arrow-cluster nav-cluster numpad-cluster"
+        "media-cluster media-cluster numpad-cluster";
+    width: fit-content;
+    height: fit-content;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
 }
 
-.keyboard-set {
+.keyboard-cluster {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -34,25 +46,11 @@ Order for CSS Elements:
     margin: 0.5vw 0.5vw;
     border: 0.1rem solid var(--side-grey);
     border-radius: 1vw;
-    overflow: hidden;
-}
-
-.keyboard-set-group {
-    display: flex;
-    flex-wrap: wrap;
-    width: fit-content;
-    height: fit-content;
-    margin-right: -32vw;
-}
-
-.keyboard-set-row {
-    display: flex;
 }
 
 .key {
     display: inline-block;
-    box-sizing: border-box;
-    width: 3vw; /* Default 1U = 3rem */
+    width: 3vw; /* Default Key Size 1U = 3vw */
     padding: 0.25vw;
     margin: 0.25vw 0.1vw;
     border: 0.1rem solid var(--side-grey);
@@ -104,8 +102,28 @@ Order for CSS Elements:
 }
 
 /* ID */
-#media-cluster {
+#main-cluster {
+    grid-area: main-cluster;
+}
+
+#arrow-cluster {
+    grid-area: arrow-cluster;
     padding: 0.75vw 1.1vw;
+}
+
+#nav-cluster {
+    grid-area: nav-cluster;
+    padding: 0.75vw 1.1vw;
+}
+
+#media-cluster {
+    grid-area: media-cluster;
+    padding: 0.75vw 1.1vw;
+}
+
+#numpad-cluster {
+    grid-area: numpad-cluster;
+    padding: 0.9vw 1.8vw;
 }
 
 #Fn {
