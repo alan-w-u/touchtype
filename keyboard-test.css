@@ -104,7 +104,7 @@ Order for CSS Elements:
 
 #arrow-cluster {
     grid-area: arrow-cluster;
-    padding: 0.75vw 1.1vw;
+    padding: 0.6vw 1.1vw;
 }
 
 #nav-cluster {
@@ -120,6 +120,12 @@ Order for CSS Elements:
 #numpad-cluster {
     grid-area: numpad-cluster;
     padding: 0.9vw 1.8vw;
+}
+
+#MetaLeft, #MetaRight {
+    padding: 0.08vw 0.25vw;
+    font-size: 1.3vw;
+    font-weight: normal;
 }
 
 #Fn {
