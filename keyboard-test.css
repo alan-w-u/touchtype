@@ -20,10 +20,10 @@ Order for CSS Elements:
 }
 
 /* Classes */
-.keyboard-all {
+.keyboard {
     display: grid;
     grid-template-areas: 
-        "main-cluster main-cluster main-cluster"
+        "keyboard-cluster keyboard-cluster keyboard-cluster"
         "arrow-cluster nav-cluster numpad-cluster"
         "media-cluster media-cluster numpad-cluster";
     width: fit-content;
@@ -33,7 +33,7 @@ Order for CSS Elements:
     white-space: nowrap;
 }
 
-.keyboard-cluster {
+.key-cluster {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -93,17 +93,13 @@ Order for CSS Elements:
     opacity: 0;
 }
 
-.press {
-    background-color: rgba(50, 150, 50, 0.75);
-}
-
 .pressed {
-    background-color: rgba(50, 150, 50, 0.5);
+    background-color: rgba(50, 150, 50, 0.3);
 }
 
 /* ID */
-#main-cluster {
-    grid-area: main-cluster;
+#keyboard-cluster {
+    grid-area: keyboard-cluster;
 }
 
 #arrow-cluster {
