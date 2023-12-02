@@ -118,7 +118,7 @@ kbd {
     margin: 0.5rem 1rem;
 }
 
-#restart {
+#reset {
     display: inline;
     position: fixed;
     transform: translate(-50%);
@@ -127,7 +127,7 @@ kbd {
     padding: 0.5rem;
 }
 
-#restart:hover {
+#reset:hover {
     border-radius: 0.5rem;
     background-color: var(--side-brown);
     color: white;

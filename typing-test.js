@@ -4,7 +4,7 @@ const userText = document.getElementById("user-text");
 const targetText = document.getElementById("target-text");
 const timer = document.getElementById("timer");
 const wpm = document.getElementById("wpm");
-const restart = document.getElementById("restart");
+const restart = document.getElementById("reset");
 const defaultTime = 30; // The default time of the typing test
 const numRandomWords = Math.round((targetText.clientWidth + targetText.clientHeight) / 12); // The number of random words to be called by the API
 
