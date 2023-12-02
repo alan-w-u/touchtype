@@ -93,6 +93,10 @@ Order for CSS Elements:
     opacity: 0;
 }
 
+.press {
+    background-color: rgba(50, 150, 50, 0.75);
+}
+
 .pressed {
     background-color: rgba(50, 150, 50, 0.3);
 }
