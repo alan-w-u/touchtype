@@ -1,24 +1,5 @@
 /* CSS file for Keyboard Test */
 
-/* 
-Order for CSS Elements:
-1. Display (display, box-sizing, visibility, z-index)
-2. Positioning (postion, top, left, right)
-3. Size (width, height, padding, margin)
-4. Border (border, border-radius, outline, resize)
-5. Background (background, box-shadow)
-6. Text (font-family, font-size, color, line-heigth, whitespace, text-align)
-7. Transforms and Transitions (transform, transitions)
-8. Else
-*/
-
-/* Hide the about when viewport too small */
-@media screen and (max-height: 50rem) {
-    .about img {
-        display: none;
-    }
-}
-
 /* Classes */
 .keyboard {
     display: grid;

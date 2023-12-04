@@ -26,7 +26,7 @@ window.onload = () => {
     getRandomWords();
 }
 
-// Keyboard inputs for the webpage
+// Keyboard inputs
 document.addEventListener("keydown", function (e) {
     // Reset the typing test by pressing ESC
     if (e.code === "Escape") {

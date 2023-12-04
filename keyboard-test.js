@@ -2,14 +2,17 @@
 const restart = document.getElementById("reset");
 const keyMap = {};
 
-// Add every key to a map
+// Add every keyboard key to a map
 document.querySelectorAll(".key").forEach(key => {
     keyMap[key.id] = key;
 })
 
-// Keyboard inputs for the webpage
+// Keyboard inputs
 document.addEventListener("keydown", function (e) {
-    // e.preventDefault();
+    // Disable non-essential keyboard commands
+    if (!(e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+    }
 
     if (keyMap[e.code]) {
         keyMap[e.code].classList.remove("pressed");
@@ -28,6 +31,7 @@ document.addEventListener("keyup", async function (e) {
 // Reset the keyboard test
 const resetKeyboardTest = () => {
     document.querySelectorAll(".key").forEach(key => {
+        key.classList.remove("press");
         key.classList.remove("pressed");
     })
 }

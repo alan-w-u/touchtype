@@ -1,30 +1,11 @@
 /* CSS file for Typing Test */
 
-/* 
-Order for CSS Elements:
-1. Display (display, box-sizing, visibility, z-index)
-2. Positioning (postion, top, left, right)
-3. Size (width, height, padding, margin)
-4. Border (border, border-radius, outline, resize)
-5. Background (background, box-shadow)
-6. Text (font-family, font-size, color, line-heigth, whitespace, text-align)
-7. Transforms and Transitions (transform, transitions)
-8. Else
-*/
-
-/* Hide the about when viewport too small */
-@media screen and (max-height: 41rem) {
-    .about img {
-        display: none;
-    }
-}
-
 /* Classes */
 .text-region {
     position: relative;
     width: 65vw;
-    height: 20rem;
-    font-size: 1.3rem;
+    height: 15rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
@@ -48,29 +29,19 @@ Order for CSS Elements:
 /* ID */
 #user-text {
     position: absolute;
+    opacity: 0;
     width: inherit;
     height: inherit;
-    padding: 0.3rem 1rem;
+    padding: 0;
     margin: inherit;
-    opacity: 0;
-    border: 0.1rem solid var(--side-grey);
-    border-radius: 1rem;
-    outline: none;
-    background: rgba(0, 0, 0, 0.025);
-    font-size: inherit;
-    font-weight: inherit;
-    resize: none;
-    overflow: scroll;
 }
 
 #target-text {
     position: absolute;
     width: inherit;
     height: inherit;
-    padding: 0.3rem 1rem;
+    padding-top: 1rem;
     margin: inherit;
-    border: 0.1rem solid var(--side-grey);
-    border-radius: 1rem;
     outline: none;
     resize: none;
     font-size: inherit;

@@ -1,12 +1,14 @@
+/* CSS file for general content */
+
 /* 
 Order for CSS Elements:
-1. Display (display, box-sizing, visibility, z-index)
-2. Positioning (postion, top, left, right)
-3. Size (width, height, padding, margin)
+1. Display (display, display styling, opacity, visibility, z-index)
+2. Positioning (position, top, bottom, left, right, float)
+3. Size (width, height, min/max width/height, padding, margin, box-sizing,)
 4. Border (border, border-radius, outline, resize)
 5. Background (background, box-shadow)
-6. Text (font-family, font-size, color, line-heigth, whitespace, text-align)
-7. Transforms and Transitions (transform, transitions)
+6. Text (font-family, font-size, color, text-decoration, line-height, white-space, text-align)
+7. Transforms and Transitions (transform, transition, align, justify)
 8. Else
 */
 
@@ -49,82 +51,74 @@ textarea::-webkit-scrollbar,
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--main-grey);
-}
-
-body {
-    background-color: var(--main-brown);
-}
-
-nav {
-    margin: 0.25rem 0rem 3rem 0rem;
-}
-
-main {
-    display: inline;
-    position: fixed;
-    transform: translate(-50%);
-    left: 50%;
-    right: auto;
-    margin: 3rem 0rem
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-}
-
-/* General HTML Objects */
-a {
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--side-grey);
     text-decoration: none;
 }
 
-label {
-    font-weight: bold;
+html, body {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    background-color: var(--main-brown);
+    align-items: center;
 }
 
+nav {
+    margin-bottom: 3rem;
+}
+
+main {
+    flex: 1;
+    margin-top: 4rem;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+/* General HTML Objects */
 kbd {
-    background-color: var(--main-brown);
-    border-radius: 3px;
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
     border: 1px solid var(--side-brown);
-    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: var(--main-brown);
     box-shadow:
       0 1px 1px rgba(0, 0, 0, 0.2),
       0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
-    display: inline-block;
     font-size: 0.85rem;
     font-weight: bold;
-    padding: 0.25rem 0.5rem;
     white-space: nowrap;
-}
-
-/* Classes */
-.about {
-    display: inline;
-    position: fixed;
-    bottom: 0.5rem;
-    transform: translate(-50%);
-    left: 50%;
-    right: auto;
 }
 
 /* ID */
 #logo {
     position: fixed;
+    left: 0;
+    right: auto;
     width: 15rem;
     height: auto;
-    margin: 0.5rem 1rem;
+    margin: 0.7rem 1rem;
 }
 
 #reset {
-    display: inline;
-    position: fixed;
-    transform: translate(-50%);
+    width: fit-content;
+    height: auto;
+    padding: 0.5rem;
+    margin: auto;
+
+    /* 
+    Alternate Center Method
+    position: relative;
+    width: fit-content;
     left: 50%;
     right: auto;
     padding: 0.5rem;
+    text-align: center;
+    transform: translate(-50%); 
+    */
 }
 
 #reset:hover {
@@ -138,8 +132,9 @@ kbd {
 nav ul {
     display: inline;
     position: fixed;
-    left: 15rem;
+    left: 17rem;
     right: auto;
+    padding: 0;
     list-style-type: none;
     overflow: hidden;
 }
@@ -151,6 +146,8 @@ nav ul li {
 nav ul li a {
     display: block;
     padding: 1rem;
+    font-size: 1rem;
+    color: var(--side-grey);
 }
 
 nav ul li a:hover {
