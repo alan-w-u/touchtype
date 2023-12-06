@@ -66,12 +66,14 @@ html, body {
 }
 
 nav {
-    margin-bottom: 3rem;
+    display: flex;
+    width: 98vw;
+    align-items: center;
 }
 
 main {
     flex: 1;
-    margin-top: 4rem;
+    margin-top: 5vh;
 }
 
 footer {
@@ -93,10 +95,35 @@ kbd {
     white-space: nowrap;
 }
 
+/* Classes */
+.nav-link {
+    padding: 1rem;
+    font-size: 1rem;
+    color: var(--side-grey);
+}
+
+.nav-link:hover {
+    border-radius: 0.75rem;
+    background-color: var(--side-brown); 
+    color: white;
+}
+
+.footer-link {
+    width: 2.5rem;
+    height: auto;
+    padding: 0.25em;
+    margin: 0.05rem;
+}
+
+.footer-link:hover {
+    border-radius: 0.5rem;
+    background-color: var(--side-brown);
+}
+
 /* ID */
 #logo {
-    position: fixed;
-    left: 0;
+    /* position: fixed;
+    left: 0; */
     right: auto;
     width: 15rem;
     height: auto;
@@ -126,44 +153,4 @@ kbd {
     background-color: var(--side-brown);
     color: white;
     cursor: pointer;
-}
-
-/* Selectors */
-nav ul {
-    display: inline;
-    position: fixed;
-    left: 17rem;
-    right: auto;
-    padding: 0;
-    list-style-type: none;
-    overflow: hidden;
-}
-
-nav ul li {
-    float: left;
-}
-
-nav ul li a {
-    display: block;
-    padding: 1rem;
-    font-size: 1rem;
-    color: var(--side-grey);
-}
-
-nav ul li a:hover {
-    border-radius: 0.75rem;
-    background-color: var(--side-brown); 
-    color: white;
-}
-
-footer img {
-    width: 2.5rem;
-    height: auto;
-    padding: 0.25em;
-    margin: 0.05rem;
-}
-
-footer img:hover {
-    border-radius: 0.5rem;
-    background-color: var(--side-brown);
 }
