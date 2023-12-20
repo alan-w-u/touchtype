@@ -1,9 +1,7 @@
-/* CSS file for Typing Test */
-
 /* Classes */
 .text-region {
     position: relative;
-    width: 65vw;
+    width: clamp(10rem, 65vw, 75rem);
     height: 15rem;
     font-size: 1.5rem;
     font-weight: bold;
@@ -73,4 +71,9 @@
     background: rgba(0, 0, 0, 0.025);
     color: var(--main-grey);
     text-align: center;
+}
+
+/* Selectors */
+label[for="wpm"] {
+    color: var(--off-grey);
 }

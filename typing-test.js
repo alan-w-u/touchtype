@@ -3,18 +3,20 @@ const textRegion = document.getElementsByClassName("text-region");
 const userText = document.getElementById("user-text");
 const targetText = document.getElementById("target-text");
 const timer = document.getElementById("timer");
+const timerLabel = document.querySelector('label[for="timer"]');
 const wpm = document.getElementById("wpm");
-const restart = document.getElementById("reset");
+const wpmLabel = document.querySelector('label[for="wpm"]');
+const reset = document.getElementById("reset");
 const defaultTime = 30; // The default time of the typing test
 const numRandomWords = Math.round((targetText.clientWidth + targetText.clientHeight) / 12); // The number of random words to be called by the API
 
 // Variables
-let startedTest = false;
-let initialTime = timer.value; // Value stored in the time input
-let testTime = 0; // Time taken for the test
-let correctStored = 0; // Number of correct characters stored when random words refreshed on the same test
-let dataMain; // The random word data being displayed
-let dataSide; // A queued set of random words (for reset performance)
+var startedTest = false;
+var initialTime = timer.value; // Value stored in the time input
+var testTime = 0; // Time taken for the test
+var correctStored = 0; // Number of correct characters stored when random words refreshed on the same test
+var dataMain; // The random word data being displayed
+var dataSide; // A queued set of random words (for reset performance)
 
 // API
 const randomWordsAPI = "https://random-word-api.vercel.app/api?words=" + numRandomWords; // More common words API (faster)
@@ -24,15 +26,15 @@ const randomWordsAPI = "https://random-word-api.vercel.app/api?words=" + numRand
 window.onload = () => {
     timer.value = defaultTime;
     getRandomWords();
-}
+};
 
 // Keyboard inputs
 document.addEventListener("keydown", function (e) {
-    // Reset the typing test by pressing ESC
+    // Reset the typing test by pressing Esc key
     if (e.code === "Escape") {
         resetTypingTest();
     }
-})
+});
 
 // Disable moving text cursor with mouse click
 userText.addEventListener("mousedown", function (e) {
@@ -40,30 +42,32 @@ userText.addEventListener("mousedown", function (e) {
         e.preventDefault();
         userText.focus();
     }
-})
+});
 
 // Disable moving text cursor with arrow keys and full word delete
 userText.addEventListener("keydown", function (e) {
+    startTypingTest();
+
     if (startedTest) {
         if (e.code === "ArrowLeft" || e.code === "ArrowUp" || e.code === "ArrowRight" || e.code === "ArrowDown" || (e.ctrlKey || e.metaKey) && e.code === "Backspace") {
             e.preventDefault();
         }
     }
-})
+});
 
 // Darken text colour when text region is focused
 userText.addEventListener("focusin", function () {
     if (!startedTest) {
         textRegion[0].classList.remove("unfocused");
     }
-})
+});
 
 // Lighten text colour when text region is unfocused
 userText.addEventListener("focusout", function () {
     if (!startedTest) {
         textRegion[0].classList.add("unfocused");
     }
-})
+});
 
 // Check if the user text matches the target text
 userText.addEventListener("input", () => {
@@ -88,7 +92,7 @@ userText.addEventListener("input", () => {
                 char.classList.add("incorrect");
             }
         }
-    })
+    });
 
     // Generate new set of words when the visible words have been filled
     if (userText.value.length === targetChars.length) {
@@ -96,7 +100,7 @@ userText.addEventListener("input", () => {
         switchRandomWords();
         userText.value = "";
     }
-})
+});
 
 // Fetch random words from the API
 const getRandomWords = async () => {
@@ -118,16 +122,16 @@ const getRandomWords = async () => {
 
     const response = await fetch(randomWordsAPI);
     dataSide = await response.json(); // Queue next set of random words (for reset performance)
-}
+};
 
 // Switch current words with queued ones
-function switchRandomWords() {
+const switchRandomWords = () => {
     dataMain = dataSide;
     getRandomWords();
-}
+};
 
 // Remove overflow of words
-function removeOverflow() {
+const removeOverflow = () => {
     while (true) {
         const lastElem = targetText.lastElementChild;
 
@@ -143,22 +147,22 @@ function removeOverflow() {
             break;
         }
     }
-}
+};
 
 // Set the timer
 const startTimer = () => {
     typingTimer = setInterval(updateTimer, 1000);
-}
+};
 
 // Update the timer
-function updateTimer() {
+const updateTimer = () => {
     if (timer.value == 0) {
-        endTest();
+        endTypingTest();
     } else {
         timer.value--;
         testTime++;
     }
-}
+};
 
 // Reset the typing test
 const resetTypingTest = () => {
@@ -170,21 +174,23 @@ const resetTypingTest = () => {
     timer.removeAttribute("disabled");
     timer.style.color = "var(--off-grey)";
     timer.style.border = "0.1rem solid var(--side-grey)";
+    timerLabel.style.color = "var(--main-grey)";
     wpm.value = "";
     wpm.style.border = "0.1rem solid transparent";
+    wpmLabel.style.color = "var(--off-grey)";
     startedTest = false;
     testTime = 0;
     correctStored = 0;
-}
+};
 
 // Reset the typing test when clicking the shortcut hint
-restart.onclick = function () {
+reset.onclick = () => {
     textRegion[0].classList.add("unfocused");
     resetTypingTest();
-}
+};
 
 // Start the typing test
-const startTest = () => {
+const startTypingTest = () => {
     if (startedTest) {
         return;
     }
@@ -208,16 +214,18 @@ const startTest = () => {
     timer.style.border = "0.1rem solid transparent";
     startedTest = true;
     startTimer();
-}
+};
 
 // End the typing test
-const endTest = () => {
+const endTypingTest = () => {
     clearInterval(typingTimer);
     userText.setAttribute("readonly", "true");
     timer.style.color = "var(--off-grey)";
+    timerLabel.style.color = "var(--off-grey)";
     wpm.style.border = "0.1rem solid var(--side-grey)";
+    wpmLabel.style.color = "var(--main-grey)";
 
     // Calculate the WPM (incorrect > correct -> negative WPM -> 0)
     totalChars = document.querySelectorAll(".correct").length;
     wpm.value = (testTime > 0)? Math.max(Math.round((totalChars + correctStored) / 5 / (testTime / 60)), 0) : 0;
-}
+};
