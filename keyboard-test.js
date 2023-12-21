@@ -14,17 +14,21 @@ document.addEventListener("keydown", function (e) {
         e.preventDefault();
     }
 
-    if (keyMap[e.code]) {
-        keyMap[e.code].classList.remove("pressed");
-        keyMap[e.code].classList.add("press");
+    const key = keyMap[e.code] || keyMap[e.key];
+
+    if (key) {
+        key.classList.remove("pressed");
+        key.classList.add("press");
     }
 });
 
 document.addEventListener("keyup", async function (e) {
-    if (keyMap[e.code]) {
+    const key = keyMap[e.code] || keyMap[e.key];
+
+    if (key) {
         await new Promise(resolve => setTimeout(resolve, 100));
-        keyMap[e.code].classList.remove("press");
-        keyMap[e.code].classList.add("pressed");
+        key.classList.remove("press");
+        key.classList.add("pressed");
     }
 });
 
