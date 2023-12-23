@@ -9,11 +9,11 @@ const keyMap = {};
 const activeKeys = [];
 const maxTests = 5 // Number of tests in a run
 const minTime = 1000 // Min time between tests in a run
-const maxTime = 5000 // Max time between tests in a run
+const maxTime = 4000 // Max time between tests in a run
 
 // Variables
-var times = []; // Times of tests in a run
-var numTests = 0;
+var times = []; // All the test times in a run
+var numTests = 0; // Number of tests already done
 var startedTest = false;
 
 // Actions when loading the webpage
@@ -28,26 +28,35 @@ document.querySelectorAll(".key").forEach(key => {
 
 // Keyboard inputs
 document.addEventListener("keydown", function (e) {
-    startReactionTest();
-
     // Disable non-essential keyboard commands
     if (!(e.ctrlKey || e.metaKey)) {
         e.preventDefault();
     }
 
+    const key = keyMap[e.code] || keyMap[e.key];
+
+    // Begin reaction test by pressing Space
+    if (key == keyMap["Space"]) { 
+        startReactionTest();
+    }
+
     // Reset the reaction test by pressing Esc key
-    if (e.code === "Escape") {
+    if (key == keyMap["Escape"]) {
         resetReactionTest();
     }
 
-    if (keyMap[e.code]) {
-        keyMap[e.code].classList.add("press");
+    if (key) {
+        key.classList.add("press");
     }
+
+    // document.getElementById("Space").textContent = e.code; // Debug key information
 });
 
 document.addEventListener("keyup", function (e) {
-    if (keyMap[e.code]) {
-        keyMap[e.code].classList.remove("press");
+    const key = keyMap[e.code] || keyMap[e.key];
+
+    if (key) {
+        key.classList.remove("press");
     }
 });
 
@@ -121,6 +130,7 @@ const resetReactionTest = () => {
         key.classList.remove("to-press");
     })
 
+    reactionTime.value = "";
     startedTest = false;
     numTests = 0;
 };
@@ -137,21 +147,40 @@ const startReactionTest = async () => {
     }
 
     startedTest = true;
+    
+    if (numTests < maxTests) {
+        reactionTest();
+        numTests++;
+    }
 
     await new Promise(resolve => setTimeout(resolve, minTime));
 
-    while (numTests < maxTests && startedTest) {
-        keyMap[getRandomKey()].classList.add("to-press");
-        numTests++
-
-        await new Promise(resolve => setTimeout(resolve, getRandomTime()));
-    }
-    
     endReactionTest();
+}
+
+const reactionTest = async () => {
+    await new Promise(resolve => setTimeout(resolve, getRandomTime()));
+
+    const key = keyMap[getRandomKey()];
+    const startTime = Date.now();
+    key.classList.add("to-press");
+
+    function checkKey(e) {
+        if (key.id == e.code) {
+          const endTime = Date.now();
+          key.classList.remove("to-press");
+          reactionTime.value = endTime - startTime + "ms";
+          document.removeEventListener("keydown", checkKey);
+          startReactionTest();
+        }
+    }
+
+    document.addEventListener("keydown", checkKey);
 };
 
 // End the reaction test
 const endReactionTest = () => {
+    reactionTime.value = "";
     startedTest = false;
     numTests = 0;
 };
