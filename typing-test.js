@@ -226,6 +226,6 @@ const endTypingTest = () => {
     wpmLabel.style.color = "var(--main-grey)";
 
     // Calculate the WPM (incorrect > correct -> negative WPM -> 0)
-    totalChars = document.querySelectorAll(".correct").length;
+    const totalChars = document.querySelectorAll(".correct").length;
     wpm.value = (testTime > 0)? Math.max(Math.round((totalChars + correctStored) / 5 / (testTime / 60)), 0) : 0;
 };
