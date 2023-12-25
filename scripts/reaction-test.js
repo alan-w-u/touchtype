@@ -12,7 +12,7 @@ const beginPrompt = document.getElementById("begin-prompt");
 const reset = document.getElementById("reset");
 const keyMap = {};
 const activeKeys = [];
-const maxTests = 4 // Number of tests in a run
+const maxTests = reactionTimeList.length // Number of tests in a run
 const minTime = 1000 // Min time between tests in a run
 const maxTime = 4000 // Max time between tests in a run
 
@@ -184,6 +184,7 @@ const startReactionTest = async () => {
     await reactionTest(0);
 }
 
+// Reaction test
 const reactionTest = async (numTests) => {
     if (numTests < maxTests) {
         await new Promise(resolve => setTimeout(resolve, getRandomTime()));
@@ -191,26 +192,29 @@ const reactionTest = async (numTests) => {
         const key = keyMap[getRandomKey()];
         const startTime = Date.now();
         key.classList.add("to-press");
-    
-        await new Promise(resolve => {        
-            document.addEventListener("keydown", function (e) {
+
+        await new Promise(resolve => {
+            const test = function (e) {
                 if (key.id == e.code) {
                     const endTime = Date.now();
                     key.classList.remove("to-press");
                     times.push(endTime - startTime);
                     reactionTimeList[numTests].value = endTime - startTime + "ms";
-
+    
                     if (numTests != maxTests - 1) {
                         reactionTimeList[numTests].style.border = "0.1rem solid var(--side-grey)";
                     }
-
+    
                     if (numTests > 0) {
                         reactionTimeList[numTests - 1].style.border = "0.1rem solid transparent";
                     }
-
+    
+                    document.removeEventListener("keydown", test);
                     resolve();
                 }
-            });
+            };
+    
+            document.addEventListener("keydown", test);
         });
 
         // Recursive call for reaction test
