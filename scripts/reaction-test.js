@@ -239,9 +239,12 @@ const endReactionTest = () => {
     reset.classList.remove("hidden");
 
     // Reset the reaction test by pressing Esc key
-    document.addEventListener("keydown", function (e) {
+    const resetCheck = function (e) {
         if (e.code == "Escape") {
+            document.removeEventListener("keydown", resetCheck);
             resetReactionTest();
         }
-    });
+    }
+    
+    document.addEventListener("keydown", resetCheck);
 };
