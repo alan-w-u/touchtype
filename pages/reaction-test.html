@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TouchType - Reaction Test</title>
-    <link rel="icon" href="images/touchtype-logomark.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="reaction-test.css">
+    <link rel="icon" href="/images/touchtype-logomark.png">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/reaction-test.css">
 </head>
 <body>
     <nav>
-        <a href="index.html"><img src="images/touchtype-logo.png" alt="TouchType logo" id="logo"></a>
-        <a href="typing-test.html" class="nav-link">Typing Test</a>
-        <a href="keyboard-test.html" class="nav-link">Keyboard Test</a>
-        <a href="reaction-test.html" class="nav-link">Reaction Test</a>
+        <a href="/index.html"><img src="/images/touchtype-logo.png" alt="TouchType logo" id="logo"></a>
+        <a href="/pages/typing-test.html" class="nav-link">Typing Test</a>
+        <a href="/pages/keyboard-test.html" class="nav-link">Keyboard Test</a>
+        <a href="/pages/reaction-test.html" class="nav-link">Reaction Test</a>
     </nav>
     <main>
-        <div class="modes">
+        <div id="modes">
             <input type="radio" id="easy" name="mode">
             <label for="easy">Easy</label>
             <input type="radio" id="normal" name="mode" checked="checked">
@@ -25,17 +25,21 @@
             <label for="hard">Hard</label>
         </div>
         <br>
-        <div class="reaction-time-final">
+        <div id="reaction-time-container">
             <label for="reaction-time">Reaction Time:</label>
             <input type="text" name="reaction-time" id="reaction-time" disabled>
         </div>
-        <!-- <div class="reaction-time-initial">
-            <input type="text" name="reaction-time" id="reaction-time" disabled>
-            <input type="text" name="reaction-time" id="reaction-time" disabled>
-            <input type="text" name="reaction-time" id="reaction-time" disabled>
-            <input type="text" name="reaction-time" id="reaction-time" disabled>
-            <input type="text" name="reaction-time" id="reaction-time" disabled>
-        </div> -->
+        <div class="hidden" id="reaction-time-list-container">
+            <div id="reaction-time-list">
+                <input type="text" name="reaction-time" class="reaction-time-list" disabled>
+                <input type="text" name="reaction-time" class="reaction-time-list" disabled>
+                <input type="text" name="reaction-time" class="reaction-time-list" disabled>
+                <input type="text" name="reaction-time" class="reaction-time-list" disabled>
+            </div>
+        </div>
+        <div id="begin-prompt-container">
+            <p id="begin-prompt">Press Any Key to Begin</p>
+        </div>
         <div class="keyboard">
             <div>
                 <div class="key hard-key hidden" id="Backquote">`</div>
@@ -106,9 +110,9 @@
         <div id="reset"><kbd>Esc</kbd> Restart</div>
     </main>
     <footer>
-        <a href="https://github.com/alan-w-u" target="_blank"><img src="images/github.png" alt="GitHub" class="footer-link"></a>
-        <a href="https://www.linkedin.com/in/alan-w-u" target="_blank"><img src="images/linkedin.png" alt="LinkedIn" class="footer-link"></a>
+        <a href="https://github.com/alan-w-u" target="_blank"><img src="/images/github.png" alt="GitHub" class="footer-link"></a>
+        <a href="https://www.linkedin.com/in/alan-w-u" target="_blank"><img src="/images/linkedin.png" alt="LinkedIn" class="footer-link"></a>
     </footer>
-    <script src="reaction-test.js"></script>
+    <script src="/scripts/reaction-test.js"></script>
 </body>
 </html>

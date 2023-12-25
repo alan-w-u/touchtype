@@ -14,28 +14,34 @@
     border-radius: 1vw;
 }
 
-.modes {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.reaction-time-final {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.reaction-time-initial {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+.reaction-time-list {
+    width: 6.5rem;
+    height: auto;
+    padding: 0.5rem;
+    margin: 0rem 0rem 0.5rem 0.5rem;
+    border: 0.1rem solid transparent;
+    border-radius: 0.5rem;
+    outline: none;
+    background: rgba(0, 0, 0, 0.025);
+    color: var(--main-grey);
+    text-align: center;
 }
 
 /* ID */
+#modes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#reaction-time-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 #reaction-time {
     width: 6.5rem;
     height: auto;
@@ -47,6 +53,23 @@
     background: rgba(0, 0, 0, 0.025);
     color: var(--main-grey);
     text-align: center;
+}
+
+#reaction-time-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#begin-prompt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 1.025rem 0rem;
+    color: rgb(250, 50, 50);
+    text-decoration-line: underline;
 }
 
 /* Selectors */
@@ -61,12 +84,12 @@ input[name=mode]:checked+label {
     background-color: var(--side-brown);
 }
 
-.modes label {
+#modes label {
     padding: 0.5rem;
     margin: 0rem 0.25rem;
 }
 
-.modes label:hover {
+#modes label:hover {
     border-radius: 0.5rem;
     background-color: var(--side-brown);
     color: white;

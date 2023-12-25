@@ -180,9 +180,6 @@ kbd {
 
 /* ID */
 #logo {
-    /* position: fixed;
-    left: 0; */
-    right: auto;
     width: 15rem;
     height: auto;
     margin: 0.7rem 1rem;

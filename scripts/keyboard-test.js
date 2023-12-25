@@ -1,9 +1,10 @@
 // Constants
+const keys = document.querySelectorAll(".key");
 const reset = document.getElementById("reset");
 const keyMap = {};
 
 // Add every keyboard key to a map
-document.querySelectorAll(".key").forEach(key => {
+keys.forEach(key => {
     keyMap[key.id] = key;
 });
 
@@ -34,7 +35,7 @@ document.addEventListener("keyup", async function (e) {
 
 // Reset the keyboard test
 const resetKeyboardTest = () => {
-    document.querySelectorAll(".key").forEach(key => {
+    keys.forEach(key => {
         key.classList.remove("press");
         key.classList.remove("pressed");
     })

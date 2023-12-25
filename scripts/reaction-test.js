@@ -1,19 +1,23 @@
 // Constants
+const keys = document.querySelectorAll(".key");
 const easy = document.getElementById("easy");
 const normal = document.getElementById("normal");
 const hard = document.getElementById("hard");
 const reactionTime = document.getElementById("reaction-time");
 const reactionTimeLabel = document.querySelector('label[for="reaction-time"]');
+const reactionTimeListContainer = document.getElementById("reaction-time-list-container");
+const reactionTimeList = document.querySelectorAll(".reaction-time-list");
+const beginPromptContainer = document.getElementById("begin-prompt-container");
+const beginPrompt = document.getElementById("begin-prompt");
 const reset = document.getElementById("reset");
 const keyMap = {};
 const activeKeys = [];
-const maxTests = 5 // Number of tests in a run
+const maxTests = 4 // Number of tests in a run
 const minTime = 1000 // Min time between tests in a run
 const maxTime = 4000 // Max time between tests in a run
 
 // Variables
 var times = []; // All the test times in a run
-var numTests = 0; // Number of tests already done
 var startedTest = false;
 
 // Actions when loading the webpage
@@ -22,7 +26,7 @@ window.onload = () => {
 };
 
 // Add every keyboard key to a map
-document.querySelectorAll(".key").forEach(key => {
+keys.forEach(key => {
     keyMap[key.id] = key;
 });
 
@@ -35,13 +39,10 @@ document.addEventListener("keydown", function (e) {
 
     const key = keyMap[e.code] || keyMap[e.key];
 
-    // Begin reaction test by pressing Space
-    if (key == keyMap["Space"]) { 
-        startReactionTest();
-    }
-
     // Reset the reaction test by pressing Esc key
-    if (key == keyMap["Escape"]) {
+    if (key != keyMap["Escape"]) {
+        startReactionTest();
+    } else {
         resetReactionTest();
     }
 
@@ -70,23 +71,24 @@ document.addEventListener("change", function (e) {
 // Check the difficulty mode
 const checkMode = () => {
     // Make all keys visible
-    document.querySelectorAll(".key").forEach(key => {
+    keys.forEach(key => {
         key.classList.remove("hidden");
-    })
+    });
 
     if (easy.checked) {
         // Hide all normal and hard keys
         document.querySelectorAll(".normal-key, .hard-key").forEach(key => {
             key.classList.add("hidden");
-        })
+        });
     } else if (normal.checked) {
         // Hide all hard keys
         document.querySelectorAll(".hard-key").forEach(key => {
             key.classList.add("hidden");
-        })
+        });
     }
 
     checkActiveKeys();
+    resetReactionTest();
 };
 
 // Check what keys are active given the current mode
@@ -112,27 +114,56 @@ const checkActiveKeys = () => {
     }
 };
 
-// Returns a random active key
+// Return a random active key
 const getRandomKey = () => {
     return activeKeys[Math.floor(Math.random() * activeKeys.length)].id;
 };
 
-// Returns a random time between tests within constraints
+// Return a random time between tests within constraints
 const getRandomTime = () => {
     return Math.floor((maxTime - minTime) * Math.random()) + minTime;
 };
 
+// Return the average reaction time
+const getAverageReactionTime = () => {
+    totalTime = 0;
+
+    times.forEach(time => {
+        totalTime += time;
+    });
+
+    return Math.round(totalTime / times.length);
+};
+
+// Switch top prompt
+const switchPrompt = () => {
+    if (!startedTest) {
+        beginPromptContainer.classList.remove("hidden");
+        reactionTimeListContainer.classList.add("hidden");
+    } else {
+        beginPromptContainer.classList.add("hidden");
+        reactionTimeListContainer.classList.remove("hidden");
+    }
+};
+
 // Reset the reaction test
 const resetReactionTest = () => {
-    document.querySelectorAll(".key").forEach(key => {
+    keys.forEach(key => {
         key.classList.remove("press");
         key.classList.remove("pressed");
         key.classList.remove("to-press");
     })
 
     reactionTime.value = "";
+    reactionTime.style.border = "0.1rem solid transparent";
+    
+    reactionTimeList.forEach(element => {
+        element.value = "";
+    });
+
     startedTest = false;
-    numTests = 0;
+    times.length = 0;
+    switchPrompt();
 };
 
 // Reset the reaction test when clicking the shortcut hint
@@ -147,40 +178,50 @@ const startReactionTest = async () => {
     }
 
     startedTest = true;
-    
-    if (numTests < maxTests) {
-        reactionTest();
-        numTests++;
-    }
+    switchPrompt();
 
-    await new Promise(resolve => setTimeout(resolve, minTime));
-
-    endReactionTest();
+    // Trampoline for recursive reaction test
+    await reactionTest(0);
 }
 
-const reactionTest = async () => {
-    await new Promise(resolve => setTimeout(resolve, getRandomTime()));
+const reactionTest = async (numTests) => {
+    if (numTests < maxTests) {
+        await new Promise(resolve => setTimeout(resolve, getRandomTime()));
 
-    const key = keyMap[getRandomKey()];
-    const startTime = Date.now();
-    key.classList.add("to-press");
+        const key = keyMap[getRandomKey()];
+        const startTime = Date.now();
+        key.classList.add("to-press");
+    
+        await new Promise(resolve => {        
+            document.addEventListener("keydown", function (e) {
+                if (key.id == e.code) {
+                    const endTime = Date.now();
+                    key.classList.remove("to-press");
+                    times.push(endTime - startTime);
+                    reactionTimeList[numTests].value = endTime - startTime + "ms";
 
-    function checkKey(e) {
-        if (key.id == e.code) {
-          const endTime = Date.now();
-          key.classList.remove("to-press");
-          reactionTime.value = endTime - startTime + "ms";
-          document.removeEventListener("keydown", checkKey);
-          startReactionTest();
-        }
+                    if (numTests != maxTests - 1) {
+                        reactionTimeList[numTests].style.border = "0.1rem solid var(--side-grey)";
+                    }
+
+                    if (numTests > 0) {
+                        reactionTimeList[numTests - 1].style.border = "0.1rem solid transparent";
+                    }
+
+                    resolve();
+                }
+            });
+        });
+
+        // Recursive call for reaction test
+        await reactionTest(numTests + 1);
+    } else {
+        endReactionTest();
     }
-
-    document.addEventListener("keydown", checkKey);
 };
 
 // End the reaction test
 const endReactionTest = () => {
-    reactionTime.value = "";
-    startedTest = false;
-    numTests = 0;
+    reactionTime.value = getAverageReactionTime() + "ms";
+    reactionTime.style.border = "0.1rem solid var(--side-grey)";
 };
