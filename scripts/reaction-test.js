@@ -40,11 +40,13 @@ document.addEventListener("keydown", function (e) {
     const key = keyMap[e.code] || keyMap[e.key];
 
     // Reset the reaction test by pressing Esc key
-    if (key != keyMap["Escape"]) {
-        startReactionTest();
-    } else {
-        resetReactionTest();
-    }
+    // if (key != keyMap["Escape"]) {
+    //     startReactionTest();
+    // } else {
+    //     resetReactionTest();
+    // }
+
+    startReactionTest();
 
     if (key) {
         key.classList.add("press");
@@ -161,6 +163,8 @@ const resetReactionTest = () => {
         element.value = "";
     });
 
+    reset.classList.add("hidden");
+
     startedTest = false;
     times.length = 0;
     switchPrompt();
@@ -195,7 +199,11 @@ const reactionTest = async (numTests) => {
 
         await new Promise(resolve => {
             const test = function (e) {
-                if (key.id == e.code) {
+                // if (e.code == "Escape") {
+                //     resetReactionTest();
+                // }
+
+                if (e.code == key.id) {
                     const endTime = Date.now();
                     key.classList.remove("to-press");
                     times.push(endTime - startTime);
@@ -228,4 +236,12 @@ const reactionTest = async (numTests) => {
 const endReactionTest = () => {
     reactionTime.value = getAverageReactionTime() + "ms";
     reactionTime.style.border = "0.1rem solid var(--side-grey)";
+    reset.classList.remove("hidden");
+
+    // Reset the reaction test by pressing Esc key
+    document.addEventListener("keydown", function (e) {
+        if (e.code == "Escape") {
+            resetReactionTest();
+        }
+    });
 };

@@ -62,7 +62,7 @@
     align-items: center;
     justify-content: center;
     width: auto;
-    height: 2rem;
+    height: 3rem;
 }
 
 #begin-prompt {
@@ -71,7 +71,7 @@
     align-items: center;
     justify-content: center;
     width: auto;
-    height: 2rem;
+    height: 3rem;
     color: rgb(250, 50, 50);
     text-decoration-line: underline;
 }
