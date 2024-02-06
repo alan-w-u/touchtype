@@ -2,6 +2,7 @@
 const keys = document.querySelectorAll(".key");
 const easy = document.getElementById("easy");
 const normal = document.getElementById("normal");
+const modeLabels = document.querySelectorAll("#modes label");
 const hard = document.getElementById("hard");
 const reactionTime = document.getElementById("reaction-time");
 const reactionTimeLabel = document.querySelector('label[for="reaction-time"]');
@@ -148,6 +149,24 @@ const switchPrompt = () => {
     }
 };
 
+// Switch mode between enabled and disabled
+const switchModeToggle = () => {
+    easy.disabled = startedTest;
+    normal.disabled = startedTest;
+    hard.disabled = startedTest;
+
+    // Toggle hover effect on mode labels
+    if (!startedTest) {
+        modeLabels.forEach(label => {
+            label.style.pointerEvents = "auto";
+        });
+    } else {
+        modeLabels.forEach(label => {
+            label.style.pointerEvents = "none";
+        });
+    }
+};
+
 // Reset the reaction test
 const resetReactionTest = () => {
     keys.forEach(key => {
@@ -168,6 +187,7 @@ const resetReactionTest = () => {
     startedTest = false;
     times.length = 0;
     switchPrompt();
+    switchModeToggle();
 };
 
 // Reset the reaction test when clicking the shortcut hint
@@ -177,12 +197,13 @@ reset.onclick = function () {
 
 // Start the reaction test
 const startReactionTest = async () => {
-    if (startedTest) {
+    if (startedTest || reactionTime.value != "") {
         return;
     }
 
     startedTest = true;
     switchPrompt();
+    switchModeToggle();
 
     // Trampoline for recursive reaction test
     await reactionTest(0);
@@ -237,6 +258,9 @@ const endReactionTest = () => {
     reactionTime.value = getAverageReactionTime() + "ms";
     reactionTime.style.border = "0.1rem solid var(--side-grey)";
     reset.classList.remove("hidden");
+
+    startedTest = false;
+    switchModeToggle();
 
     // Reset the reaction test by pressing Esc key
     const resetCheck = function (e) {
