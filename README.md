@@ -13,6 +13,6 @@ The website has:
 
 ## Images
 
-![image](images/typingtest.png)
-![image](images/keyboardtest.png)
-![image](images/reactiontest.png)
+<img src="images/typingtest.png" alt="typingtest" />
+<img src="images/keyboardtest.png" alt="keyboardtest" />
+<img src="images/reactiontest.png" alt="reactiontest" />
