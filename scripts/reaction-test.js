@@ -23,252 +23,252 @@ var startedTest = false;
 
 // Actions when loading the webpage
 window.onload = () => {
-    checkMode();
+  checkMode();
 };
 
 // Add every keyboard key to a map
 keys.forEach(key => {
-    keyMap[key.id] = key;
+  keyMap[key.id] = key;
 });
 
 // Keyboard inputs
 document.addEventListener("keydown", (e) => {
-    // Disable non-essential keyboard commands
-    if (!(e.ctrlKey || e.metaKey)) {
-        e.preventDefault();
-    }
+  // Disable non-essential keyboard commands
+  if (!(e.ctrlKey || e.metaKey)) {
+    e.preventDefault();
+  }
 
-    const key = keyMap[e.code] || keyMap[e.key];
+  const key = keyMap[e.code] || keyMap[e.key];
 
-    // Reset the reaction test by pressing Esc key
-    // if (key != keyMap["Escape"]) {
-    //     startReactionTest();
-    // } else {
-    //     resetReactionTest();
-    // }
+  // Reset the reaction test by pressing Esc key
+  // if (key != keyMap["Escape"]) {
+  //     startReactionTest();
+  // } else {
+  //     resetReactionTest();
+  // }
 
-    startReactionTest();
+  startReactionTest();
 
-    if (key) {
-        key.classList.add("press");
-    }
+  if (key) {
+    key.classList.add("press");
+  }
 
-    // document.getElementById("Space").textContent = e.code; // Debug key information
+  // document.getElementById("Space").textContent = e.code; // Debug key information
 });
 
 document.addEventListener("keyup", (e) => {
-    const key = keyMap[e.code] || keyMap[e.key];
+  const key = keyMap[e.code] || keyMap[e.key];
 
-    if (key) {
-        key.classList.remove("press");
-    }
+  if (key) {
+    key.classList.remove("press");
+  }
 });
 
 // Input inputs
 document.addEventListener("change", (e) => {
-    if (e.target.type === "radio" && e.target.name === "mode") {
-        checkMode();
-    }
+  if (e.target.type === "radio" && e.target.name === "mode") {
+    checkMode();
+  }
 });
 
 // Check the difficulty mode
 const checkMode = () => {
-    // Make all keys visible
-    keys.forEach(key => {
-        key.classList.remove("hidden");
+  // Make all keys visible
+  keys.forEach(key => {
+    key.classList.remove("hidden");
+  });
+
+  if (easy.checked) {
+    // Hide all normal and hard keys
+    document.querySelectorAll(".normal-key, .hard-key").forEach(key => {
+      key.classList.add("hidden");
     });
+  } else if (normal.checked) {
+    // Hide all hard keys
+    document.querySelectorAll(".hard-key").forEach(key => {
+      key.classList.add("hidden");
+    });
+  }
 
-    if (easy.checked) {
-        // Hide all normal and hard keys
-        document.querySelectorAll(".normal-key, .hard-key").forEach(key => {
-            key.classList.add("hidden");
-        });
-    } else if (normal.checked) {
-        // Hide all hard keys
-        document.querySelectorAll(".hard-key").forEach(key => {
-            key.classList.add("hidden");
-        });
-    }
-
-    checkActiveKeys();
-    resetReactionTest();
+  checkActiveKeys();
+  resetReactionTest();
 };
 
 // Check what keys are active given the current mode
 const checkActiveKeys = () => {
-    // Empty the activeKeys array
-    activeKeys.length = 0;
+  // Empty the activeKeys array
+  activeKeys.length = 0;
 
-    // Set easy keys to active
-    document.querySelectorAll(".easy-key").forEach(key => {
-        activeKeys.push(key);
+  // Set easy keys to active
+  document.querySelectorAll(".easy-key").forEach(key => {
+    activeKeys.push(key);
+  });
+
+  if (normal.checked) {
+    // Set normal keys to active
+    document.querySelectorAll(".normal-key").forEach(key => {
+      activeKeys.push(key);
     });
-
-    if (normal.checked) {
-        // Set normal keys to active
-        document.querySelectorAll(".normal-key").forEach(key => {
-            activeKeys.push(key);
-        });
-    } else if (hard.checked) {
-        // Set normal and hard keys to active
-        document.querySelectorAll(".normal-key, .hard-key").forEach(key => {
-            activeKeys.push(key);
-        });
-    }
+  } else if (hard.checked) {
+    // Set normal and hard keys to active
+    document.querySelectorAll(".normal-key, .hard-key").forEach(key => {
+      activeKeys.push(key);
+    });
+  }
 };
 
 // Return a random active key
 const getRandomKey = () => {
-    return activeKeys[Math.floor(Math.random() * activeKeys.length)].id;
+  return activeKeys[Math.floor(Math.random() * activeKeys.length)].id;
 };
 
 // Return a random time between tests within constraints
 const getRandomTime = () => {
-    return Math.floor((maxTime - minTime) * Math.random()) + minTime;
+  return Math.floor((maxTime - minTime) * Math.random()) + minTime;
 };
 
 // Return the average reaction time
 const getAverageReactionTime = () => {
-    totalTime = 0;
+  totalTime = 0;
 
-    times.forEach(time => {
-        totalTime += time;
-    });
+  times.forEach(time => {
+    totalTime += time;
+  });
 
-    return Math.round(totalTime / times.length);
+  return Math.round(totalTime / times.length);
 };
 
 // Switch top prompt
 const switchPrompt = () => {
-    if (!startedTest) {
-        beginPromptContainer.classList.remove("hidden");
-        reactionTimeListContainer.classList.add("hidden");
-    } else {
-        beginPromptContainer.classList.add("hidden");
-        reactionTimeListContainer.classList.remove("hidden");
-    }
+  if (!startedTest) {
+    beginPromptContainer.classList.remove("hidden");
+    reactionTimeListContainer.classList.add("hidden");
+  } else {
+    beginPromptContainer.classList.add("hidden");
+    reactionTimeListContainer.classList.remove("hidden");
+  }
 };
 
 // Switch mode between enabled and disabled
 const switchModeToggle = () => {
-    easy.disabled = startedTest;
-    normal.disabled = startedTest;
-    hard.disabled = startedTest;
+  easy.disabled = startedTest;
+  normal.disabled = startedTest;
+  hard.disabled = startedTest;
 
-    // Toggle hover effect on mode labels
-    if (!startedTest) {
-        modeLabels.forEach(label => {
-            label.style.pointerEvents = "auto";
-        });
-    } else {
-        modeLabels.forEach(label => {
-            label.style.pointerEvents = "none";
-        });
-    }
+  // Toggle hover effect on mode labels
+  if (!startedTest) {
+    modeLabels.forEach(label => {
+      label.style.pointerEvents = "auto";
+    });
+  } else {
+    modeLabels.forEach(label => {
+      label.style.pointerEvents = "none";
+    });
+  }
 };
 
 // Reset the reaction test
 const resetReactionTest = () => {
-    keys.forEach(key => {
-        key.classList.remove("press");
-        key.classList.remove("pressed");
-        key.classList.remove("to-press");
-    })
+  keys.forEach(key => {
+    key.classList.remove("press");
+    key.classList.remove("pressed");
+    key.classList.remove("to-press");
+  })
 
-    reactionTime.value = "";
-    reactionTime.style.border = "0.1rem solid transparent";
-    
-    reactionTimeList.forEach(element => {
-        element.value = "";
-    });
+  reactionTime.value = "";
+  reactionTime.style.border = "0.1rem solid transparent";
 
-    reset.classList.add("hidden");
+  reactionTimeList.forEach(element => {
+    element.value = "";
+  });
 
-    startedTest = false;
-    times.length = 0;
-    switchPrompt();
-    switchModeToggle();
+  reset.classList.add("hidden");
+
+  startedTest = false;
+  times.length = 0;
+  switchPrompt();
+  switchModeToggle();
 };
 
 // Reset the reaction test when clicking the shortcut hint
 reset.onclick = () => {
-    resetReactionTest();
+  resetReactionTest();
 };
 
 // Start the reaction test
 const startReactionTest = async () => {
-    if (startedTest || reactionTime.value != "") {
-        return;
-    }
+  if (startedTest || reactionTime.value != "") {
+    return;
+  }
 
-    startedTest = true;
-    switchPrompt();
-    switchModeToggle();
+  startedTest = true;
+  switchPrompt();
+  switchModeToggle();
 
-    // Trampoline for recursive reaction test
-    await reactionTest(0);
+  // Trampoline for recursive reaction test
+  await reactionTest(0);
 }
 
 // Reaction test
 const reactionTest = async (numTests) => {
-    if (numTests < maxTests) {
-        await new Promise(resolve => setTimeout(resolve, getRandomTime()));
+  if (numTests < maxTests) {
+    await new Promise(resolve => setTimeout(resolve, getRandomTime()));
 
-        const key = keyMap[getRandomKey()];
-        const startTime = Date.now();
-        key.classList.add("to-press");
+    const key = keyMap[getRandomKey()];
+    const startTime = Date.now();
+    key.classList.add("to-press");
 
-        await new Promise(resolve => {
-            const test = (e) => {
-                // if (e.code == "Escape") {
-                //     resetReactionTest();
-                // }
+    await new Promise(resolve => {
+      const test = (e) => {
+        // if (e.code == "Escape") {
+        //     resetReactionTest();
+        // }
 
-                if (e.code == key.id) {
-                    const endTime = Date.now();
-                    key.classList.remove("to-press");
-                    times.push(endTime - startTime);
-                    reactionTimeList[numTests].value = endTime - startTime + "ms";
-    
-                    if (numTests != maxTests - 1) {
-                        reactionTimeList[numTests].style.border = "0.1rem solid var(--side-grey)";
-                    }
-    
-                    if (numTests > 0) {
-                        reactionTimeList[numTests - 1].style.border = "0.1rem solid transparent";
-                    }
-    
-                    document.removeEventListener("keydown", test);
-                    resolve();
-                }
-            };
-    
-            document.addEventListener("keydown", test);
-        });
+        if (e.code == key.id) {
+          const endTime = Date.now();
+          key.classList.remove("to-press");
+          times.push(endTime - startTime);
+          reactionTimeList[numTests].value = endTime - startTime + "ms";
 
-        // Recursive call for reaction test
-        await reactionTest(numTests + 1);
-    } else {
-        endReactionTest();
-    }
+          if (numTests != maxTests - 1) {
+            reactionTimeList[numTests].style.border = "0.1rem solid var(--side-grey)";
+          }
+
+          if (numTests > 0) {
+            reactionTimeList[numTests - 1].style.border = "0.1rem solid transparent";
+          }
+
+          document.removeEventListener("keydown", test);
+          resolve();
+        }
+      };
+
+      document.addEventListener("keydown", test);
+    });
+
+    // Recursive call for reaction test
+    await reactionTest(numTests + 1);
+  } else {
+    endReactionTest();
+  }
 };
 
 // End the reaction test
 const endReactionTest = () => {
-    reactionTime.value = getAverageReactionTime() + "ms";
-    reactionTime.style.border = "0.1rem solid var(--side-grey)";
-    reset.classList.remove("hidden");
+  reactionTime.value = getAverageReactionTime() + "ms";
+  reactionTime.style.border = "0.1rem solid var(--side-grey)";
+  reset.classList.remove("hidden");
 
-    startedTest = false;
-    switchModeToggle();
+  startedTest = false;
+  switchModeToggle();
 
-    // Reset the reaction test by pressing Esc key
-    const resetCheck = (e) => {
-        if (e.code == "Escape") {
-            document.removeEventListener("keydown", resetCheck);
-            resetReactionTest();
-        }
+  // Reset the reaction test by pressing Esc key
+  const resetCheck = (e) => {
+    if (e.code == "Escape") {
+      document.removeEventListener("keydown", resetCheck);
+      resetReactionTest();
     }
-    
-    document.addEventListener("keydown", resetCheck);
+  }
+
+  document.addEventListener("keydown", resetCheck);
 };

@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TouchType - Typing Test</title>
-    <link rel="icon" href="../images/touchtype-logomark.png">
-    <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="../styles/typing-test.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TouchType - Typing Test</title>
+  <link rel="icon" href="../images/touchtype-logomark.png">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/typing-test.css">
 </head>
+
 <body>
-    <nav>
-        <a href="../index.html"><img src="../images/touchtype-logo.png" alt="TouchType logo" id="logo"></a>
-        <a href="../pages/typing-test.html" class="nav-link">Typing Test</a>
-        <a href="../pages/keyboard-test.html" class="nav-link">Keyboard Test</a>
-        <a href="../pages/reaction-test.html" class="nav-link">Reaction Test</a>
-    </nav>
-    <main>
-        <label for="timer">Time:</label>
-        <input type="number" name="timer" id="timer" onfocus="this.value=''">
-        <label for="wpm">WPM:</label>
-        <input type="number" name="wpm" id="wpm" disabled>
-        <br>
-        <div class="text-region unfocused">
-            <div id="target-text"></div>
-            <textarea name="user-text" id="user-text"
-            spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
-        </div>
-        <br>
-        <div id="reset"><kbd>Esc</kbd> Restart</div>
-    </main>
-    <footer>
-        <a href="https://github.com/alan-w-u" target="_blank"><img src="../images/github.png" alt="GitHub" class="footer-link"></a>
-        <a href="https://www.linkedin.com/in/alan-w-u/" target="_blank"><img src="../images/linkedin.png" alt="LinkedIn" class="footer-link"></a>
-    </footer>
-    <script src="../scripts/typing-test.js"></script>
+  <nav>
+    <a href="../index.html"><img src="../images/touchtype-logo.png" alt="TouchType logo" id="logo"></a>
+    <a href="../pages/typing-test.html" class="nav-link">Typing Test</a>
+    <a href="../pages/keyboard-test.html" class="nav-link">Keyboard Test</a>
+    <a href="../pages/reaction-test.html" class="nav-link">Reaction Test</a>
+  </nav>
+  <main>
+    <label for="timer">Time:</label>
+    <input type="number" name="timer" id="timer" onfocus="this.value=''">
+    <label for="wpm">WPM:</label>
+    <input type="number" name="wpm" id="wpm" disabled>
+    <br>
+    <div class="text-region unfocused">
+      <div id="target-text"></div>
+      <textarea name="user-text" id="user-text" spellcheck="false" data-gramm="false" data-gramm_editor="false"
+        data-enable-grammarly="false"></textarea>
+    </div>
+    <br>
+    <div id="reset"><kbd>Esc</kbd> Restart</div>
+  </main>
+  <footer>
+    <a href="https://github.com/alan-w-u" target="_blank"><img src="../images/github.png" alt="GitHub"
+        class="footer-link"></a>
+    <a href="https://www.linkedin.com/in/alan-w-u/" target="_blank"><img src="../images/linkedin.png" alt="LinkedIn"
+        class="footer-link"></a>
+  </footer>
+  <script src="../scripts/typing-test.js"></script>
 </body>
+
 </html>

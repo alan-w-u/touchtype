@@ -1,79 +1,79 @@
 /* Classes */
 .text-region {
-    position: relative;
-    width: clamp(10rem, 65vw, 75rem);
-    height: 15rem;
-    font-size: 1.5rem;
-    font-weight: bold;
+  position: relative;
+  width: clamp(10rem, 65vw, 75rem);
+  height: 15rem;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .target-char {
-    font-size: inherit;
-    color: var(--side-grey);
+  font-size: inherit;
+  color: var(--side-grey);
 }
 
 .text-region.unfocused .target-char {
-    color: var(--off-grey);
+  color: var(--off-grey);
 }
 
 .correct {
-    color: rgb(50, 150, 50);
+  color: rgb(50, 150, 50);
 }
 
 .incorrect {
-    color: rgb(250, 50, 50);
+  color: rgb(250, 50, 50);
 }
 
 /* ID */
 #user-text {
-    position: absolute;
-    opacity: 0;
-    width: inherit;
-    height: inherit;
-    padding: 0;
-    margin: inherit;
+  position: absolute;
+  opacity: 0;
+  width: inherit;
+  height: inherit;
+  padding: 0;
+  margin: inherit;
 }
 
 #target-text {
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    padding-top: 1rem;
-    margin: inherit;
-    outline: none;
-    resize: none;
-    font-size: inherit;
-    font-weight: inherit;
-    overflow: scroll;
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  padding-top: 1rem;
+  margin: inherit;
+  outline: none;
+  resize: none;
+  font-size: inherit;
+  font-weight: inherit;
+  overflow: scroll;
 }
 
 #timer {
-    width: 5rem;
-    height: auto;
-    padding: 0.5rem;
-    margin: 0.25rem 3rem 0.5rem 0;
-    border: 0.1rem solid var(--side-grey);
-    border-radius: 0.5rem;
-    outline: none;
-    background: rgba(0, 0, 0, 0.025);
-    color: var(--off-grey);
-    text-align: center;
+  width: 5rem;
+  height: auto;
+  padding: 0.5rem;
+  margin: 0.25rem 3rem 0.5rem 0;
+  border: 0.1rem solid var(--side-grey);
+  border-radius: 0.5rem;
+  outline: none;
+  background: rgba(0, 0, 0, 0.025);
+  color: var(--off-grey);
+  text-align: center;
 }
 
 #wpm {
-    width: 5rem;
-    height: auto;
-    padding: 0.5rem;
-    margin: 0.25rem 0 0.5rem 0;
-    border: 0.1rem solid transparent;
-    border-radius: 0.5rem;
-    outline: none;
-    background: rgba(0, 0, 0, 0.025);
-    color: var(--main-grey);
-    text-align: center;
+  width: 5rem;
+  height: auto;
+  padding: 0.5rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border: 0.1rem solid transparent;
+  border-radius: 0.5rem;
+  outline: none;
+  background: rgba(0, 0, 0, 0.025);
+  color: var(--main-grey);
+  text-align: center;
 }
 
 /* Selectors */
 label[for="wpm"] {
-    color: var(--off-grey);
+  color: var(--off-grey);
 }

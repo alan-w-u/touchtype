@@ -21,174 +21,176 @@ Order for CSS Documentation
 
 /* Custom Colours */
 :root {
-    --main-grey: rgb(50, 50, 50); /* #323232 | rgb(50, 50, 50) */
-    --side-grey: rgb(100, 100, 100); /* #646464 | rgb(100, 100, 100) */
-    --off-grey: rgb(150, 150, 150); /* #969696 | rgb(150, 150, 150) */
-    --main-brown: rgb(234, 215, 187); /* #ead7bb | rgb(234, 215, 187) */
-    --side-brown: rgb(182, 158, 123); /* #b69e7b | rgb(182, 158, 123) */
+  --main-grey: #323232;
+  --side-grey: #646464;
+  --off-grey: #969696;
+  --main-brown: #ead7bb;
+  --side-brown: #b69e7b;
 }
 
 /* Remove scroll button for number input */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    display: none;
+  display: none;
 }
 
 /* Remove scroll bar for text area */
 textarea::-webkit-scrollbar,
 #target-text::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /* Main HTML/Semantic (Section) Elements */
 * {
-    user-select: none;
-    box-sizing: border-box;
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--main-grey);
-    text-decoration: none;
+  user-select: none;
+  box-sizing: border-box;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--main-grey);
+  text-decoration: none;
 }
 
-html, body {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    background-color: var(--main-brown);
-    align-items: center;
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: var(--main-brown);
+  align-items: center;
 }
 
 nav {
-    display: flex;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
 
 main {
-    flex: 1;
-    margin-top: 5vh;
+  flex: 1;
+  margin-top: 5vh;
 }
 
 footer {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 /* General HTML Objects */
 kbd {
-    display: inline-block;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid var(--side-brown);
-    border-radius: 3px;
-    background-color: var(--main-brown);
-    box-shadow:
-      0 1px 1px rgba(0, 0, 0, 0.2),
-      0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
-    font-size: 0.85rem;
-    font-weight: bold;
-    white-space: nowrap;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--side-brown);
+  border-radius: 3px;
+  background-color: var(--main-brown);
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.2),
+    0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+  font-size: 0.85rem;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
 /* Classes */
 .nav-link {
-    padding: 1rem;
-    font-size: 1rem;
-    color: var(--side-grey);
+  padding: 1rem;
+  font-size: 1rem;
+  color: var(--side-grey);
 }
 
 .nav-link:hover {
-    border-radius: 0.75rem;
-    background-color: var(--side-brown); 
-    color: white;
+  border-radius: 0.75rem;
+  background-color: var(--side-brown);
+  color: white;
 }
 
 .footer-link {
-    width: 2.5rem;
-    height: auto;
-    padding: 0.25em;
-    margin: 0.05rem;
+  width: 2.5rem;
+  height: auto;
+  padding: 0.25em;
+  margin: 0.05rem;
 }
 
 .footer-link:hover {
-    border-radius: 0.5rem;
-    background-color: var(--side-brown);
+  border-radius: 0.5rem;
+  background-color: var(--side-brown);
 }
 
 .key {
-    display: inline-block;
-    width: clamp(1rem, 3vw, 4rem); /* Default Key Size 1U = 3vw */
-    height: auto;
-    padding: clamp(0.1rem, 0.25vw, 0.4rem);
-    margin: clamp(0.1rem, 0.25vw, 0.5rem) clamp(0, 0.1vw, 0.5rem);
-    border: 0.1rem solid var(--side-grey);
-    border-radius: 0.5vw;
-    font-size: clamp(0.5rem, 1.1vw, 1rem);
-    text-align: center;
-    overflow: hidden;
+  display: inline-block;
+  width: clamp(1rem, 3vw, 4rem);
+  /* Default Key Size 1U = 3vw */
+  height: auto;
+  padding: clamp(0.1rem, 0.25vw, 0.4rem);
+  margin: clamp(0.1rem, 0.25vw, 0.5rem) clamp(0, 0.1vw, 0.5rem);
+  border: 0.1rem solid var(--side-grey);
+  border-radius: 0.5vw;
+  font-size: clamp(0.5rem, 1.1vw, 1rem);
+  text-align: center;
+  overflow: hidden;
 }
 
 /* 1U = 3vw */
 .key-1_25u {
-    width: clamp(1rem, 3.75vw, 5rem);
+  width: clamp(1rem, 3.75vw, 5rem);
 }
 
 .key-1_5u {
-    width: clamp(0.5rem, 4.5vw, 6rem);
+  width: clamp(0.5rem, 4.5vw, 6rem);
 }
 
 .key-1_75u {
-    width: clamp(0.5rem, 5.25vw, 7rem);
+  width: clamp(0.5rem, 5.25vw, 7rem);
 }
 
 .key-2u {
-    width: clamp(0.5rem, 6vw, 8rem);
+  width: clamp(0.5rem, 6vw, 8rem);
 }
 
 .key-2_25u {
-    width: clamp(0.5rem, 6.75vw, 9rem);
+  width: clamp(0.5rem, 6.75vw, 9rem);
 }
 
 .key-2_75u {
-    width: clamp(0.5rem, 8.25vw, 11rem);
+  width: clamp(0.5rem, 8.25vw, 11rem);
 }
 
 .key-6_25u {
-    width: clamp(0.5rem, 18.75vw, 25rem);
+  width: clamp(0.5rem, 18.75vw, 25rem);
 }
 
 .press {
-    background-color: rgba(50, 150, 50, 0.75);
+  background-color: rgba(50, 150, 50, 0.75);
 }
 
 .pressed {
-    background-color: rgba(50, 150, 50, 0.3);
+  background-color: rgba(50, 150, 50, 0.3);
 }
 
 .to-press {
-    background-color: rgba(250, 50, 50, 0.75);
+  background-color: rgba(250, 50, 50, 0.75);
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 /* ID */
 #logo {
-    width: 15rem;
-    height: auto;
-    margin: 0.7rem 1rem;
+  width: 15rem;
+  height: auto;
+  margin: 0.7rem 1rem;
 }
 
 #reset {
-    width: fit-content;
-    height: auto;
-    padding: 0.5rem;
-    margin: auto;
+  width: fit-content;
+  height: auto;
+  padding: 0.5rem;
+  margin: auto;
 
-    /* 
+  /* 
     Alternate Center Method
     position: relative;
     width: fit-content;
@@ -201,8 +203,8 @@ kbd {
 }
 
 #reset:hover {
-    border-radius: 0.5rem;
-    background-color: var(--side-brown);
-    color: white;
-    cursor: pointer;
+  border-radius: 0.5rem;
+  background-color: var(--side-brown);
+  color: white;
+  cursor: pointer;
 }
