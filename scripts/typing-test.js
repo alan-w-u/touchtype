@@ -29,7 +29,7 @@ window.onload = () => {
 };
 
 // Keyboard inputs
-document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", (e) => {
     // Reset the typing test by pressing Esc key
     if (e.code === "Escape") {
         resetTypingTest();
@@ -37,7 +37,7 @@ document.addEventListener("keydown", function (e) {
 });
 
 // Disable moving text cursor with mouse click
-userText.addEventListener("mousedown", function (e) {
+userText.addEventListener("mousedown", (e) => {
     if (startedTest) {
         e.preventDefault();
         userText.focus();
@@ -45,7 +45,7 @@ userText.addEventListener("mousedown", function (e) {
 });
 
 // Disable moving text cursor with arrow keys and full word delete
-userText.addEventListener("keydown", function (e) {
+userText.addEventListener("keydown", (e) => {
     startTypingTest();
 
     if (startedTest) {
@@ -56,14 +56,14 @@ userText.addEventListener("keydown", function (e) {
 });
 
 // Darken text colour when text region is focused
-userText.addEventListener("focusin", function () {
+userText.addEventListener("focusin", () => {
     if (!startedTest) {
         textRegion[0].classList.remove("unfocused");
     }
 });
 
 // Lighten text colour when text region is unfocused
-userText.addEventListener("focusout", function () {
+userText.addEventListener("focusout", () => {
     if (!startedTest) {
         textRegion[0].classList.add("unfocused");
     }

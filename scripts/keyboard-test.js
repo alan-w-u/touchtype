@@ -9,7 +9,7 @@ keys.forEach(key => {
 });
 
 // Keyboard inputs
-document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", (e) => {
     // Disable non-essential keyboard commands
     if (!(e.ctrlKey || e.metaKey)) {
         e.preventDefault();
@@ -23,7 +23,7 @@ document.addEventListener("keydown", function (e) {
     }
 });
 
-document.addEventListener("keyup", async function (e) {
+document.addEventListener("keyup", async (e) => {
     const key = keyMap[e.code] || keyMap[e.key];
 
     if (key) {
@@ -42,6 +42,6 @@ const resetKeyboardTest = () => {
 };
 
 // Reset the keyboard test when clicking the shortcut hint
-reset.onclick = function () {
+reset.onclick = () => {
     resetKeyboardTest();
 };

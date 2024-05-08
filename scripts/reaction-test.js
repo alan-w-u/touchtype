@@ -32,7 +32,7 @@ keys.forEach(key => {
 });
 
 // Keyboard inputs
-document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", (e) => {
     // Disable non-essential keyboard commands
     if (!(e.ctrlKey || e.metaKey)) {
         e.preventDefault();
@@ -56,7 +56,7 @@ document.addEventListener("keydown", function (e) {
     // document.getElementById("Space").textContent = e.code; // Debug key information
 });
 
-document.addEventListener("keyup", function (e) {
+document.addEventListener("keyup", (e) => {
     const key = keyMap[e.code] || keyMap[e.key];
 
     if (key) {
@@ -65,7 +65,7 @@ document.addEventListener("keyup", function (e) {
 });
 
 // Input inputs
-document.addEventListener("change", function (e) {
+document.addEventListener("change", (e) => {
     if (e.target.type === "radio" && e.target.name === "mode") {
         checkMode();
     }
@@ -191,7 +191,7 @@ const resetReactionTest = () => {
 };
 
 // Reset the reaction test when clicking the shortcut hint
-reset.onclick = function () {
+reset.onclick = () => {
     resetReactionTest();
 };
 
@@ -219,7 +219,7 @@ const reactionTest = async (numTests) => {
         key.classList.add("to-press");
 
         await new Promise(resolve => {
-            const test = function (e) {
+            const test = (e) => {
                 // if (e.code == "Escape") {
                 //     resetReactionTest();
                 // }
@@ -263,7 +263,7 @@ const endReactionTest = () => {
     switchModeToggle();
 
     // Reset the reaction test by pressing Esc key
-    const resetCheck = function (e) {
+    const resetCheck = (e) => {
         if (e.code == "Escape") {
             document.removeEventListener("keydown", resetCheck);
             resetReactionTest();
